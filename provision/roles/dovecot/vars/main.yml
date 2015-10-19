@@ -1,0 +1,8 @@
+---
+dovecot_packages:
+  - name: dovecot-antispam
+  - name: dovecot-imapd
+  - name: dovecot-ldap
+  - name: dovecot-lmtpd
+  - name: dovecot-managesieved
+  - name: dovecot-sieve

@@ -1,0 +1,16 @@
+---
+- name: update apt
+  sudo: yes
+  apt:
+    update_cache: yes
+
+- name: reload systemd
+  sudo: yes
+  command: systemctl daemon-reload
+
+- name: install packages
+  sudo: yes
+  with_items: common_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest

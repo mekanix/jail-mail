@@ -1,0 +1,4 @@
+---
+ldap_packages:
+  - name: ldap-utils
+  - name: slapd

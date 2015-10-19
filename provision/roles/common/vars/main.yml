@@ -1,0 +1,4 @@
+---
+common_packages:
+  - name: git
+  - name: vim-nox

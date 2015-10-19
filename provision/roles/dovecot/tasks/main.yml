@@ -1,0 +1,9 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: dovecot_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+  notify:
+    - restart dovecot

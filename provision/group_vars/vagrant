@@ -1,0 +1,8 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+
+---
+stage: vagrant
+db_password: password
+flask_environment: dev
+webapp_user: vagrant

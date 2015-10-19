@@ -1,0 +1,12 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: ldap_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+  notify:
+    - prepare modifications
+    - modify ldap
+    - prepare top level component
+    - add top level component
