@@ -6,3 +6,4 @@ stage: vagrant
 db_password: password
 flask_environment: dev
 webapp_user: vagrant
+ldap_admin_password: password

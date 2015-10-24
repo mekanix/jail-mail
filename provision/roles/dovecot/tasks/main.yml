@@ -7,3 +7,45 @@
     state: latest
   notify:
     - restart dovecot
+
+- name: create data dir
+  sudo: yes
+  file:
+    path: /data
+    owner: dovecot
+    group: dovecot
+    state: directory
+
+- name: configure ldap auth
+  sudo: yes
+  template:
+    src: dovecot-ldap.conf.ext.j2
+    dest: /etc/dovecot/dovecot-ldap.conf.ext
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - restart dovecot
+
+- name: configure dovecot
+  sudo: yes
+  with_items: dovecot_configs
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/etc/dovecot/conf.d/{{ item.name }}"
+    owner: root
+    group: root
+  notify:
+    - restart dovecot
+
+- name: install cert
+  sudo: yes
+  with_items: dovecot_certs
+  copy:
+    src: "{{ item.name }}"
+    dest: "/etc/dovecot/{{ item.name }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart dovecot

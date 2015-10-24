@@ -3,3 +3,10 @@ objectClass: dcObject
 objectClass: organization
 o: ldap
 dc: ldap
+
+dn: cn=admin,dc=ldap
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: {{ ldap_admin_password }}
