@@ -1,0 +1,46 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: dkim_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+
+- name: create /etc/mail
+  sudo: yes
+  file:
+    path: /etc/mail
+    owner: root
+    group: root
+    state: directory
+
+- name: copy dkim.key
+  sudo: yes
+  copy:
+    src: dkim.key
+    dest: /etc/mail/dkim.key
+    owner: opendkim
+    group: opendkim
+    mode: 0600
+  notify:
+    - restart dkim
+
+- name: configure dkim
+  sudo: yes
+  template:
+    src: opendkim.conf.j2
+    dest: /etc/opendkim.conf
+    owner: root
+    group: root
+  notify:
+    - restart dkim
+
+- name: configure dkim service
+  sudo: yes
+  template:
+    src: opendkim.j2
+    dest: /etc/default/opendkim
+    owner: root
+    group: root
+  notify:
+    - restart dkim

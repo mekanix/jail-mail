@@ -1,0 +1,15 @@
+---
+postfix_packages:
+  - name: postfix
+  - name: postfix-ldap
+  - name: postfix-policyd-spf-python
+
+postfix_exim_packages:
+  - name: exim4
+  - name: exim4-base
+  - name: exim4-config
+  - name: exim4-daemon-light
+
+postfix_config:
+  - name: main.cf
+  - name: master.cf

@@ -14,5 +14,6 @@ dovecot_certs:
 dovecot_configs:
   - name: 10-auth.conf
   - name: 10-mail.conf
+  - name: 10-master.conf
   - name: 10-ssl.conf
   - name: auth-ldap.conf.ext
