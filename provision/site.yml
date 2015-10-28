@@ -9,3 +9,6 @@
     - dovecot
     - dkim
     - postfix
+    - php
+    - nginx
+    - squirrelmail

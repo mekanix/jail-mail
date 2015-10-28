@@ -1,0 +1,5 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+
+---
+domain: mail.tilda.center

@@ -1,0 +1,30 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: nginx_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+  notify:
+    - restart nginx
+
+- name: install cert
+  sudo: yes
+  copy:
+    src: "{{ fqdn }}.pem"
+    dest: "/etc/ssl/{{ fqdn }}.pem"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+
+- name: configure vhost
+  sudo: yes
+  template:
+    src: default.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+  notify:
+    - restart nginx
