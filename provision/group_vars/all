@@ -2,4 +2,4 @@
 # vi: set ft=ansible :
 
 ---
-domain: mail.tilda.center
+domain: tilda.center

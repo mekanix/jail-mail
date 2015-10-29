@@ -1,0 +1,46 @@
+server {
+    server_name {{ subdomain }}mailman.{{ domain }};
+    listen 80;
+    listen [::]:80;
+    return 301 https://{{ subdomain }}mailman.{{ domain }}$request_uri;
+
+}
+
+server {
+    server_name {{ subdomain }}mailman.{{ domain }};
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/ssl/{{ subdomain }}mail.{{ domain }}.pem;
+    ssl_certificate_key /etc/ssl/{{ subdomain }}mail.{{ domain }}.pem;
+
+    access_log /var/log/nginx/{{ subdomain }}mailman.{{ domain }}.log;
+    error_log /var/log/nginx/{{ subdomain }}mailman.{{ domain }}.err;
+
+    location / {
+        return 301 /cgi-bin/mailman/listinfo;
+    }
+
+    location /pipermail {
+        autoindex on;
+        alias /var/lib/mailman/archives/public;
+    }
+
+    location /images {
+        alias /usr/share/images;
+    }
+
+    location /cgi-bin/mailman {
+        root /usr/lib/;
+        fastcgi_split_path_info (^/cgi-bin/mailman/[^/]*)(.*)$;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_intercept_errors on;
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}

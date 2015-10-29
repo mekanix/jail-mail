@@ -4,4 +4,4 @@
 ---
 stage: vagrant
 ldap_admin_password: password
-fqdn: "{{ stage }}.{{ domain }}"
+subdomain: "{{ stage }}."

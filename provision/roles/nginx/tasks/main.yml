@@ -11,20 +11,51 @@
 - name: install cert
   sudo: yes
   copy:
-    src: "{{ fqdn }}.pem"
-    dest: "/etc/ssl/{{ fqdn }}.pem"
+    src: "{{ subdomain }}mail.{{ domain }}.pem"
+    dest: "/etc/ssl/{{ subdomain }}mail.{{ domain }}.pem"
     owner: root
     group: root
     mode: 0644
   notify:
     - restart nginx
 
+- name: disable default config
+  sudo: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - restart nginx
+
 - name: configure vhost
   sudo: yes
+  with_items: nginx_vhosts
   template:
-    src: default.j2
-    dest: /etc/nginx/sites-available/default
+    src: "{{ item.name }}.j2"
+    dest: "/etc/nginx/sites-available/{{ subdomain }}{{ item.name }}.{{ domain }}"
     owner: root
     group: root
+  notify:
+    - restart nginx
+
+- name: enable vhost
+  sudo: yes
+  with_items: nginx_vhosts
+  file:
+    src: "/etc/nginx/sites-available/{{ subdomain }}{{ item.name }}.{{ domain }}"
+    dest: "/etc/nginx/sites-enabled/{{ subdomain }}{{ item.name }}.{{ domain }}"
+    owner: root
+    group: root
+    state: link
+  notify:
+    - restart nginx
+
+- name: disable default config
+  sudo: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    owner: root
+    group: root
+    state: absent
   notify:
     - restart nginx

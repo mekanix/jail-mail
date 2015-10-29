@@ -1,0 +1,17 @@
+---
+- name: install pasckages
+  sudo: yes
+  with_items: mailman_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+
+- name: configure settings
+  sudo: yes
+  template:
+    src: mm_cfg.py.j2
+    dest: /etc/mailman/mm_cfg.py
+    owner: root
+    group: root
+  notify:
+    - reload config

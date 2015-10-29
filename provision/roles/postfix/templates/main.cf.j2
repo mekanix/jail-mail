@@ -49,7 +49,7 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # information on enabling SSL in the smtp client.
 
 myhostname = mail.tilda.center
-alias_maps = hash:/etc/aliases
+alias_maps = hash:/etc/aliases, hash:/var/lib/mailman/data/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
 mydestination =
