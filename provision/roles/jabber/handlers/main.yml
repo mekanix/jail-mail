@@ -1,0 +1,6 @@
+---
+- name: restart ejabberd
+  sudo: yes
+  service:
+    name: ejabberd
+    state: restarted

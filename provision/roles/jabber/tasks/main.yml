@@ -1,0 +1,19 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: jabber_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+  notify:
+    - restart ejabberd
+
+- name: configure settings
+  sudo: yes
+  template:
+    src: ejabberd.yml.j2
+    dest: /etc/ejabberd/ejabberd.yml
+    owner: ejabberd
+    group: ejabberd
+  notify:
+    - restart ejabberd
