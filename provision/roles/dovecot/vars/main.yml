@@ -16,4 +16,6 @@ dovecot_configs:
   - name: 10-mail.conf
   - name: 10-master.conf
   - name: 10-ssl.conf
+  - name: 15-lda.conf
+  - name: 20-managesieve.conf
   - name: auth-ldap.conf.ext
