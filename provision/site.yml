@@ -10,7 +10,9 @@
     - dkim
     - postfix
     - php
+    - python
+    - radicale
     - nginx
-    - squirrelmail
+    - rainloop
     - mailman
     - jabber

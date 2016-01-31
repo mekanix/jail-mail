@@ -13,7 +13,7 @@ server {
     ssl_certificate /etc/ssl/{{ subdomain }}mail.{{ domain }}.pem;
     ssl_certificate_key /etc/ssl/{{ subdomain }}mail.{{ domain }}.pem;
 
-    root /var/www/html/squirrelmail-webmail-1.4.22;
+    root /var/www/html;
     index index.html index.htm index.php index.nginx-debian.html;
 
     access_log /var/log/nginx/{{ subdomain }}mail.{{ domain }}.log;
