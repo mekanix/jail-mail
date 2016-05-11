@@ -1,6 +1,6 @@
 ---
 - name: install radicale_packages
-  sudo: yes
-  with_items: radicale_packages
+  become: yes
+  with_items: "{{ radicale_packages }}"
   pip:
     name: "{{ item.name }}"

@@ -1,4 +1,4 @@
 ---
 - name: reload config
-  sudo: yes
+  become: yes
   shell: /usr/lib/mailman/bin/withlist -l -a -r fix_url

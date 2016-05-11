@@ -1,7 +1,7 @@
 ---
 - name: install packages
-  sudo: yes
-  with_items: dovecot_packages
+  become: yes
+  with_items: "{{ dovecot_packages }}"
   apt:
     pkg: "{{ item.name }}"
     state: latest
@@ -9,7 +9,7 @@
     - restart dovecot
 
 - name: create data dir
-  sudo: yes
+  become: yes
   file:
     path: /data
     owner: dovecot
@@ -17,7 +17,7 @@
     state: directory
 
 - name: configure ldap auth
-  sudo: yes
+  become: yes
   template:
     src: dovecot-ldap.conf.ext.j2
     dest: /etc/dovecot/dovecot-ldap.conf.ext
@@ -28,8 +28,8 @@
     - restart dovecot
 
 - name: configure dovecot
-  sudo: yes
-  with_items: dovecot_configs
+  become: yes
+  with_items: "{{ dovecot_configs }}"
   template:
     src: "{{ item.name }}.j2"
     dest: "/etc/dovecot/conf.d/{{ item.name }}"
@@ -39,8 +39,8 @@
     - restart dovecot
 
 - name: install cert
-  sudo: yes
-  with_items: dovecot_certs
+  become: yes
+  with_items: "{{ dovecot_certs }}"
   copy:
     src: "{{ item.name }}"
     dest: "/etc/dovecot/{{ item.name }}"

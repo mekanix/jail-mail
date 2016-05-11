@@ -1,7 +1,7 @@
 ---
 - name: install packages
-  sudo: yes
-  with_items: jabber_packages
+  become: yes
+  with_items: "{{ jabber_packages }}"
   apt:
     pkg: "{{ item.name }}"
     state: latest
@@ -9,7 +9,7 @@
     - restart ejabberd
 
 - name: configure settings
-  sudo: yes
+  become: yes
   template:
     src: ejabberd.yml.j2
     dest: /etc/ejabberd/ejabberd.yml

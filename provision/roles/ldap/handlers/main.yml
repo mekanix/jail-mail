@@ -1,6 +1,6 @@
 ---
 - name: prepare modifications
-  sudo: yes
+  become: yes
   template:
     src: modify.ldif.j2
     dest: /tmp/modify.ldif
@@ -8,11 +8,11 @@
     group: root
 
 - name: modify ldap
-  sudo: yes
+  become: yes
   shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/modify.ldif
 
 - name: prepare top level component
-  sudo: yes
+  become: yes
   template:
     src: prepare.ldif.j2
     dest: /tmp/prepare.ldif
@@ -20,5 +20,5 @@
     group: root
 
 - name: add top level component
-  sudo: yes
+  become: yes
   shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/prepare.ldif

@@ -1,6 +1,6 @@
 ---
 - name: restart dkim
-  sudo: yes
+  become: yes
   service:
     name: opendkim
     state: restarted

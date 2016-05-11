@@ -1,6 +1,6 @@
 ---
 - name: restart dovecot
-  sudo: yes
+  become: yes
   service:
     name: dovecot
     state: restarted

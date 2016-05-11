@@ -1,22 +1,22 @@
 ---
 - name: configure sources.list
-  sudo: yes
+  become: yes
   template:
-    src: jessie.list.j2
+    src: roles/common/templates/jessie.list.j2
     dest: /etc/apt/sources.list
     owner: root
     group: root
 
-- name: update apt
-  sudo: yes
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-
 - name: add jessie-backports
-  sudo: yes
+  become: yes
   template:
-    src: jessie-backports.list.j2
+    src: roles/common/templates/jessie-backports.list.j2
     dest: /etc/apt/sources.list.d/jessie-backports.list
     owner: root
     group: root
+
+- name: update apt
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600

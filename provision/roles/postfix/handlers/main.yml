@@ -1,5 +1,5 @@
 - name: restart postfix
-  sudo: yes
+  become: yes
   service:
     name: postfix
     state: restarted

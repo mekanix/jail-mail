@@ -6,15 +6,15 @@
     sha256sum: 286453c7aac6cfd0b78509a597be2f15012f0c0c4abd44328ac4c55fb2d0b847
 
 - name: unpack squirrelmail
-  sudo: yes
+  become: yes
   unarchive:
     src: /tmp/squirrelmail.tar.gz
     dest: /var/www/html
     copy: no
 
 - name: create directories
-  sudo: yes
-  with_items: squirrelmail_directories
+  become: yes
+  with_items: "{{ squirrelmail_directories }}"
   file:
     path: "/var/local/squirrelmail/{{ item.name }}"
     owner: www-data
@@ -22,7 +22,7 @@
     state: directory
 
 - name: configure settings
-  sudo: yes
+  become: yes
   template:
     src: config.php.j2
     dest: /var/www/html/squirrelmail-webmail-1.4.22/config/config.php
@@ -36,14 +36,14 @@
     sha256sum: efe26ddfb2689fa7914b25581606e68c91e5795a4838bd2c27f89172a48ac974
 
 - name: unpack change-ldap-pass plugin
-  sudo: yes
+  become: yes
   unarchive:
     src: /tmp/squirrel-ldap.tar.gz
     dest: /var/www/html/squirrelmail-webmail-1.4.22/plugins
     copy: no
 
 - name: configure change-ldap-pass plugin
-  sudo: yes
+  become: yes
   template:
     src: config-ldap.php.j2
     dest: /var/www/html/squirrelmail-webmail-1.4.22/plugins/change_ldappass/config.php
@@ -57,7 +57,7 @@
     sha256sum: 15881185a6e7c2f27261e10182ec3ad9872ffc835adf527ea0325ae0fe4e3c8c
 
 - name: unpack avelsieve plugin
-  sudo: yes
+  become: yes
   unarchive:
     src: /tmp/avelsieve-1.9.9.tar.gz
     dest: /var/www/html/squirrelmail-webmail-1.4.22/plugins

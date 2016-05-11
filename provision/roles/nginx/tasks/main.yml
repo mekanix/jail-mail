@@ -1,7 +1,7 @@
 ---
 - name: install packages
-  sudo: yes
-  with_items: nginx_packages
+  become: yes
+  with_items: "{{ nginx_packages }}"
   apt:
     pkg: "{{ item.name }}"
     state: latest
@@ -9,7 +9,7 @@
     - restart nginx
 
 - name: install cert
-  sudo: yes
+  become: yes
   copy:
     src: "{{ subdomain }}mail.{{ domain }}.pem"
     dest: "/etc/ssl/{{ subdomain }}mail.{{ domain }}.pem"
@@ -20,7 +20,7 @@
     - restart nginx
 
 - name: disable default config
-  sudo: yes
+  become: yes
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
@@ -28,8 +28,8 @@
     - restart nginx
 
 - name: configure vhost
-  sudo: yes
-  with_items: nginx_vhosts
+  become: yes
+  with_items: "{{ nginx_vhosts }}"
   template:
     src: "{{ item.name }}.j2"
     dest: "/etc/nginx/sites-available/{{ subdomain }}{{ item.name }}.{{ domain }}"
@@ -39,8 +39,8 @@
     - restart nginx
 
 - name: enable vhost
-  sudo: yes
-  with_items: nginx_vhosts
+  become: yes
+  with_items: "{{ nginx_vhosts }}"
   file:
     src: "/etc/nginx/sites-available/{{ subdomain }}{{ item.name }}.{{ domain }}"
     dest: "/etc/nginx/sites-enabled/{{ subdomain }}{{ item.name }}.{{ domain }}"
@@ -51,7 +51,7 @@
     - restart nginx
 
 - name: disable default config
-  sudo: yes
+  become: yes
   file:
     path: /etc/nginx/sites-enabled/default
     owner: root
