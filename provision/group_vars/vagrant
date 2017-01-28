@@ -1,7 +1,0 @@
-# -*- mode: ansible -*-
-# vi: set ft=ansible :
-
----
-stage: vagrant
-ldap_admin_password: password
-subdomain: "{{ stage }}."

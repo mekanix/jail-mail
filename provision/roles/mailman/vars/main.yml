@@ -1,4 +1,0 @@
----
-mailman_packages:
-  - name: fcgiwrap
-  - name: mailman

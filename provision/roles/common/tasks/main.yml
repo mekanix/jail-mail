@@ -1,16 +1,31 @@
 ---
-- name: update apt
-  become: yes
-  apt:
-    update_cache: yes
+- name: stop sendmail
+  service:
+    name: sendmail
+    state: stopped
 
-- name: reload systemd
-  become: yes
-  command: systemctl daemon-reload
+- name: disable sendmail
+  template:
+    src: sendmail.j2
+    dest: /etc/rc.conf.d/sendmail
+
+- name: configure pkg
+  template:
+    src: FreeBSD.conf.j2
+    dest: /etc/pkg/FreeBSD.conf
 
 - name: install packages
-  become: yes
   with_items: "{{ common_packages }}"
-  apt:
-    pkg: "{{ item.name }}"
-    state: latest
+  pkgng:
+    name: "{{ item.name }}"
+
+- name: create certs dir
+  file:
+    path: /etc/ssl/certs
+    state: directory
+
+- name: create private certs dir
+  file:
+    path: /etc/ssl/private
+    mode: 0700
+    state: directory

@@ -1,7 +1,0 @@
----
-- name: install python packages
-  become: yes
-  with_items: "{{ python_packages }}"
-  apt:
-    pkg: "{{ item.name }}"
-    state: latest

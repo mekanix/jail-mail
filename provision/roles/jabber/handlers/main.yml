@@ -1,6 +1,0 @@
----
-- name: restart ejabberd
-  become: yes
-  service:
-    name: ejabberd
-    state: restarted

@@ -1,7 +1,0 @@
----
-- name: install rainloop
-  become: yes
-  shell: "curl -s http://repository.rainloop.net/installer.php | php"
-  args:
-    chdir: /var/www/html
-    creates: /var/www/html/rainloop

@@ -1,9 +1,0 @@
----
-- name: install packages
-  become: yes
-  with_items: "{{ php_packages }}"
-  apt:
-    pkg: "{{ item.name }}"
-    state: latest
-  notify:
-    - restart php5-fpm

@@ -1,4 +1,3 @@
 ---
 common_packages:
-  - name: git
-  - name: vim-nox
+  - name: ca_root_nss

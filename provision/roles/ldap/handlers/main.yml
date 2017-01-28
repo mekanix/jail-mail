@@ -1,24 +1,5 @@
 ---
-- name: prepare modifications
-  become: yes
-  template:
-    src: modify.ldif.j2
-    dest: /tmp/modify.ldif
-    owner: root
-    group: root
-
-- name: modify ldap
-  become: yes
-  shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/modify.ldif
-
-- name: prepare top level component
-  become: yes
-  template:
-    src: prepare.ldif.j2
-    dest: /tmp/prepare.ldif
-    owner: root
-    group: root
-
-- name: add top level component
-  become: yes
-  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/prepare.ldif
+- name: restart ldap server
+  service:
+    name: slapd
+    state: restarted

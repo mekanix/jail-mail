@@ -1,35 +1,17 @@
 ---
 - name: install packages
-  become: yes
   with_items: "{{ postfix_packages }}"
-  apt:
-    pkg: "{{ item.name }}"
-    state: latest
+  pkgng:
+    name: "{{ item.name }}"
   notify:
     - restart postfix
 
-- name: remove exim
-  become: yes
-  with_items: "{{ postfix_exim_packages }}"
-  shell: "apt-get purge -y {{ item.name }}"
-
 - name: confgure postfix
-  become: yes
   with_items: "{{ postfix_config }}"
   template:
     src: "{{ item.name }}.j2"
-    dest: "/etc/postfix/{{ item.name }}"
+    dest: "/usr/local/etc/postfix/{{ item.name }}"
     owner: root
-    group: root
-  notify:
-    - restart postfix
-
-- name: configure mailname
-  become: yes
-  template:
-    src: mailname.j2
-    dest: /etc/mailname
-    owner: root
-    group: root
+    group: wheel
   notify:
     - restart postfix

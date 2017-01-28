@@ -1,6 +1,0 @@
----
-- name: restart dkim
-  become: yes
-  service:
-    name: opendkim
-    state: restarted

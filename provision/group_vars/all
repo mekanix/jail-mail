@@ -1,5 +1,0 @@
-# -*- mode: ansible -*-
-# vi: set ft=ansible :
-
----
-domain: tilda.center

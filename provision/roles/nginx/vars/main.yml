@@ -1,7 +1,0 @@
----
-nginx_packages:
-  - name: nginx
-
-nginx_vhosts:
-  - name: mail
-  - name: mailman
