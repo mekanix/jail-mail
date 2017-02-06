@@ -122,8 +122,8 @@ mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
 
-policy  unix  -       n       n       -       -       spawn
-  user=nobody argv=/usr/bin/policyd-spf
+policy  unix  -       n       n       -       0        spawn
+  user=nobody argv=/usr/local/bin/policyd-spf
 
 dovecot unix    -       n       n       -       -       pipe
-  flags=DRhu user=dovecot:dovecot argv=/usr/lib/dovecot/deliver -d ${recipient}
+  flags=DRhu user=dovecot:dovecot argv=/usr/local/libexec/dovecot/deliver -d ${recipient}

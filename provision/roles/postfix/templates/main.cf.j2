@@ -69,9 +69,6 @@ virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 default_destination_concurency_limit = 1
 
-ldap_user = cn=admin,dc=ldap
-ldap_pass = {{ ldap_admin_password }}
-
 aliases_server_host = localhost
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))

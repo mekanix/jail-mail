@@ -1,6 +1,7 @@
 ---
 postfix_packages:
   - name: postfix
+  - name: py27-postfix-policyd-spf-python
 
 postfix_config:
   - name: main.cf
