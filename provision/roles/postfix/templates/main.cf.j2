@@ -67,34 +67,30 @@ virtual_alias_maps = ldap:aliases
 virtual_mailbox_domains = ldap:domains
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
-default_destination_concurency_limit = 1
 
-aliases_server_host = localhost
+aliases_server_host = {{ hostvars[project].ansible_all_ipv4_addresses[0] }}
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
 aliases_scope = sub
 aliases_cache = yes
 aliases_bind = yes
-aliases_bind_dn = $ldap_user
-aliases_bind_pw = $ldap_pass
 aliases_version = 3
 
-domains_server_host = localhost
+domains_server_host = {{ hostvars[project].ansible_all_ipv4_addresses[0] }}
 domains_search_base = dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
 domains_scope = sub
 domains_cache = yes
 domains_bind = yes
-domains_bind_dn = $ldap_user
-domains_bind_pw = $ldap_pass
 domains_version = 3
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:localhost:8891
-non_smtpd_milters = inet:localhost:8891
+smtpd_milters = inet:{{ hostvars[project].ansible_all_ipv4_addresses[0] }}:8891
+non_smtpd_milters = inet:{{ hostvars[project].ansible_all_ipv4_addresses[0] }}:8891
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400
+compatibility_level = 2

@@ -15,3 +15,19 @@
     group: wheel
   notify:
     - restart postfix
+
+- name: confgure postfix service
+  template:
+    src: postfix.j2
+    dest: /etc/rc.conf.d/postfix
+    owner: root
+    group: wheel
+  notify:
+    - restart postfix
+
+- name: update postfix
+  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make OPTIONS_FILE_SET=LDAP -DBATCH -C /usr/ports/mail/postfix reinstall clean
+  args:
+    creates: /usr/local/lib/postfix/postfix-ldap.so
+  notify:
+    - restart postfix
