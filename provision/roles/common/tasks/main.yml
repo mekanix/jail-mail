@@ -29,3 +29,8 @@
     path: /etc/ssl/private
     mode: 0700
     state: directory
+
+- name: configure .cshrc
+  template:
+    src: cshrc.j2
+    dest: /root/.cshrc

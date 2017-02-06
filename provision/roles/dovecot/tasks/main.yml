@@ -80,3 +80,10 @@
     name: dovecot
     groups: mail
     append: yes
+
+- name: update dovecot
+  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make OPTIONS_FILE_SET=LDAP -DBATCH -C /usr/ports/mail/dovecot2 reinstall clean
+  args:
+    creates: /usr/local/lib/dovecot/libdovecot-ldap.so
+  notify:
+    - restart dovecot

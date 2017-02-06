@@ -8,4 +8,5 @@
 /cbsd/jails-data/PROJECT-data/usr/compat /usr/compat nullfs rw 0 0
 /cbsd/jails-data/PROJECT-data/var /var nullfs rw 0 0
 PWD /usr/home/devel/workdir nullfs rw 0 0
+/var/tmp/ccache /var/tmp/ccache nullfs rw 0 0
 #
