@@ -1,0 +1,5 @@
+---
+- name: restart dkim
+  service:
+    name: milter-opendkim
+    state: restarted

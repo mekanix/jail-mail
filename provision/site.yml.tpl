@@ -9,6 +9,7 @@
     - ldap
     - dovecot
     - postfix
+    - dkim
 
 - name: PROJECT localhost provisioning
   hosts: localhost
