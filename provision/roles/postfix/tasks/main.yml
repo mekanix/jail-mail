@@ -31,3 +31,8 @@
     creates: /usr/local/lib/postfix/postfix-ldap.so
   notify:
     - restart postfix
+
+- name: configure policyd
+  template:
+    src: policyd-spf.conf.j2
+    dest: /usr/local/etc/postfix-policyd-spf-python/policyd-spf.conf

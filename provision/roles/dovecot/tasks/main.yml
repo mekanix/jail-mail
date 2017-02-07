@@ -38,9 +38,9 @@
   template:
     src: dovecot.conf.j2
     dest: /usr/local/etc/dovecot/dovecot.conf
-    owner: root
-    group: wheel
-    mode: 0600
+    owner: dovecot
+    group: mail
+    mode: 0640
   notify:
     - restart dovecot
 
