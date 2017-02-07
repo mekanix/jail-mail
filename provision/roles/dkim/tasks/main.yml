@@ -6,7 +6,7 @@
 
 - name: copy dkim.key
   copy:
-    src: dkim.key
+    src: "dkim.key.{{ stage }}"
     dest: /etc/mail/dkim.key
     owner: mailnull
     group: mail

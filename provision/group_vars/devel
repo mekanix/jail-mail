@@ -3,3 +3,4 @@
 
 ---
 ldap_admin_password: root
+stage: devel
