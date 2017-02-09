@@ -81,8 +81,20 @@
     groups: mail
     append: yes
 
+- name: create port config dir
+  file:
+    path: /var/db/ports/mail_dovecot2
+    owner: root
+    group: wheel
+    state: directory
+
+- name: configure dovecot port
+  template:
+    src: port-options.j2
+    dest: /var/db/ports/mail_dovecot2/options
+
 - name: update dovecot
-  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make OPTIONS_FILE_SET=LDAP -DBATCH -C /usr/ports/mail/dovecot2 reinstall clean
+  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make -DBATCH -C /usr/ports/mail/dovecot2 reinstall clean
   args:
     creates: /usr/local/lib/dovecot/libdovecot-ldap.so
   notify:

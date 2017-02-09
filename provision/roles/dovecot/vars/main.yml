@@ -1,6 +1,7 @@
 ---
 dovecot_packages:
   - name: dovecot2
+  - name: dovecot-pigeonhole
 
 dovecot_certs:
   - name: dovecot.pem
