@@ -1,2 +1,2 @@
 project: PROJECT
-domain: tilda.center
+domain: DOMAIN
