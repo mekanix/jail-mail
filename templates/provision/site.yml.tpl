@@ -10,6 +10,7 @@
     - dovecot
     - postfix
     - dkim
+    - rainloop
 
 - name: PROJECT localhost provisioning
   hosts: localhost
