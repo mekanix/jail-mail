@@ -1,5 +1,0 @@
----
-- name: install packages
-  with_items: "{{ rainloop_packages }}"
-  pkgng:
-    name: "{{ item.name }}"
