@@ -8,6 +8,8 @@
   template:
     src: slapd.conf.j2
     dest: /usr/local/etc/openldap/slapd.conf
+  notify:
+    - restart ldap server
 
 - name: configure ldap
   template:

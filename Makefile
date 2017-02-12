@@ -1,7 +1,9 @@
-PROJECT=mail
-DOMAIN=tilda.center
-INVENTORY=localhost
-STAGE=devel
+.if exists(Makefile.vars)
+.include <Makefile.vars>
+.endif
+
+.include <Makefile.inc>
+
 
 provision: up
 	@sudo ansible-playbook -i provision/inventory/${INVENTORY} provision/site.yml
@@ -9,7 +11,7 @@ provision: up
 up: setup
 	@sudo cbsd jcreate jconf=${PWD}/cbsd.conf || true
 	@sudo sh -c 'sed -e "s:PWD:${PWD}:g" -e "s:PROJECT:${PROJECT}:g" templates/fstab.conf.${STAGE}.tpl >/cbsd/jails-fstab/fstab.${PROJECT}'
-	@sudo chown 1001:1001 cbsd.conf
+	@sudo chown ${UID}:${GID} cbsd.conf
 	@sudo cbsd jstart ${PROJECT} || true
 
 down: setup

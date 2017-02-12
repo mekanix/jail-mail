@@ -5,3 +5,4 @@ provision/inventory/localhost
 provision/site.yml
 cbsd.conf
 backup.ldif
+Makefile.vars

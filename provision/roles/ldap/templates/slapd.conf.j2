@@ -38,11 +38,15 @@ moduleload	back_mdb
 #	Directives needed to implement policy:
 # access to dn.base="" by * read
 # access to dn.base="cn=Subschema" by * read
-# access to *
-#	by self write
-#	by users read
-#	by anonymous auth
-#
+access to attrs=userPassword
+  by self write
+  by anonymous auth
+
+access to *
+  by self write
+  by users read
+  by anonymous read
+
 # if no access controls are present, the default policy
 # allows anyone and everyone to read anything but restricts
 # updates to rootdn.  (e.g., "access to * by * read")
