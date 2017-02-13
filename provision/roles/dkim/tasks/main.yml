@@ -1,0 +1,38 @@
+---
+- name: install packages
+  with_items: "{{ dkim_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+  notify:
+    - update opendkim
+    - restart dkim
+
+- name: configure dkim
+  template:
+    src: opendkim.conf.j2
+    dest: /usr/local/etc/mail/opendkim.conf
+    owner: root
+    group: wheel
+  notify:
+    - restart dkim
+
+- name: configure dkim service
+  template:
+    src: milteropendkim.j2
+    dest: /etc/rc.conf.d/milteropendkim
+    owner: root
+    group: wheel
+  notify:
+    - restart dkim
+
+- name: create port config dir
+  file:
+    path: /var/db/ports/mail_opendkim
+    owner: root
+    group: wheel
+    state: directory
+
+- name: configure port
+  template:
+    src: port-options.j2
+    dest: /var/db/ports/mail_opendkim/options

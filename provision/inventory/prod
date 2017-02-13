@@ -1,0 +1,4 @@
+mail ansible_ssh_host=188.226.130.133 ansible_ssh_user=root
+
+[prod]
+mail

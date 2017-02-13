@@ -1,0 +1,4 @@
+---
+common_packages:
+  - name: ca_root_nss
+  - name: ccache

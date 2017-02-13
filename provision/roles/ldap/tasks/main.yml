@@ -1,0 +1,36 @@
+---
+- name: install packages
+  with_items: "{{ ldap_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+
+- name: configure slapd
+  template:
+    src: slapd.conf.j2
+    dest: /usr/local/etc/openldap/slapd.conf
+  notify:
+    - restart ldap server
+
+- name: configure ldap
+  template:
+    src: ldap.conf.j2
+    dest: /usr/local/etc/openldap/ldap.conf
+
+- name: enable slapd service
+  template:
+    src: slapd.j2
+    dest: /etc/rc.conf.d/slapd
+  notify:
+    - restart ldap server
+
+- name: keep the config
+  file:
+    path: /var/db/openldap-data/.keep
+    state: directory
+  notify:
+    - load sample data
+
+- name: install opendkim schema
+  template:
+    src: opendkim.schema.j2
+    dest: /usr/local/etc/openldap/schema/opendkim.schema

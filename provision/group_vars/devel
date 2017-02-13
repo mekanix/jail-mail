@@ -1,0 +1,6 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+
+---
+ldap_admin_password: root
+stage: devel

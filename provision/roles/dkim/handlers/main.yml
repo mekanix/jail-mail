@@ -1,0 +1,8 @@
+---
+- name: update opendkim
+  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make -DBATCH -C /usr/ports/mail/opendkim reinstall clean
+
+- name: restart dkim
+  service:
+    name: milter-opendkim
+    state: restarted

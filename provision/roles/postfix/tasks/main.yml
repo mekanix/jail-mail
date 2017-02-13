@@ -1,0 +1,50 @@
+---
+- name: install packages
+  with_items: "{{ postfix_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+  notify:
+    - restart postfix
+
+- name: confgure postfix
+  with_items: "{{ postfix_config }}"
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/usr/local/etc/postfix/{{ item.name }}"
+    owner: root
+    group: wheel
+  notify:
+    - restart postfix
+
+- name: confgure postfix service
+  template:
+    src: postfix.j2
+    dest: /etc/rc.conf.d/postfix
+    owner: root
+    group: wheel
+  notify:
+    - restart postfix
+
+- name: create port config dir
+  file:
+    path: /var/db/ports/mail_postfix
+    owner: root
+    group: wheel
+    state: directory
+
+- name: configure postfix port
+  template:
+    src: port-options.j2
+    dest: /var/db/ports/mail_postfix/options
+
+- name: update postfix
+  shell: CCACHE_DIR=/var/tmp/ccache PATH=/usr/local/libexec/ccache:${PATH} make -DBATCH -C /usr/ports/mail/postfix reinstall clean
+  args:
+    creates: /usr/local/lib/postfix/postfix-ldap.so
+  notify:
+    - restart postfix
+
+- name: configure policyd
+  template:
+    src: policyd-spf.conf.j2
+    dest: /usr/local/etc/postfix-policyd-spf-python/policyd-spf.conf
