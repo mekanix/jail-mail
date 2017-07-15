@@ -3,6 +3,14 @@ postfix_packages:
   - name: postfix
   - name: py27-postfix-policyd-spf-python
 
-postfix_config:
-  - name: main.cf
-  - name: master.cf
+postfix_consul_template_prefix: postfix
+
+postfix_consul_templates:
+  - destination: /usr/local/etc/postfix/master.cf
+    filename: master.cf.tpl
+
+  - destination: /usr/local/etc/postfix/main.cf
+    filename: main.cf.tpl
+
+  - destination: /usr/local/etc/postfix-policyd-spf-python/policyd-spf.conf
+    filename: policyd-spf.conf.tpl

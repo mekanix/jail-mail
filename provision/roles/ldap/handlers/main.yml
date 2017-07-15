@@ -1,8 +1,0 @@
----
-- name: restart ldap server
-  service:
-    name: slapd
-    state: restarted
-
-- name: load sample data
-  command: ldapadd -w {{ ldap_admin_password }} -D cn=root,dc=ldap -f ~devel/workdir/sample-backup.ldif

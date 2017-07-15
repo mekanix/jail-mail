@@ -1,0 +1,12 @@
+---
+letsencrypt_packages:
+  - name: dehydrated
+
+letsencrypt_consul_template_prefix: letsencrypt
+
+letsencrypt_consul_templates:
+  - destination: /usr/local/etc/dehydrated/config
+    filename: config.tpl
+
+  - destination: /usr/local/etc/dehydrated/domains.txt
+    filename: domains.txt.tpl

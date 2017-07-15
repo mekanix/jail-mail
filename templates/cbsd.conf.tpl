@@ -10,10 +10,10 @@ allow_mount="1";
 allow_devfs="1";
 allow_nullfs="1";
 mount_fstab="/cbsd/jails-fstab/fstab.PROJECT";
-arch="amd64";
+arch="native";
 mkhostsfile="1";
 devfs_ruleset="4";
-ver="11.0";
+ver="native";
 basename="";
 baserw="0";
 mount_src="0";
@@ -30,7 +30,7 @@ floatresolv="1";
 zfs_snapsrc="";
 
 exec_poststart="0";
-exec_poststop="";
+exec_poststop="0";
 exec_prestart="0";
 exec_prestop="0";
 

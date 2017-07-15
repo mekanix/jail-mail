@@ -30,7 +30,26 @@
     mode: 0700
     state: directory
 
-- name: configure .cshrc
+- name: create consul-template config dir
+  file:
+    path: /usr/local/etc/consul-template.d
+    state: directory
+
+- name: create consul-template template dir
+  file:
+    path: "{{ consul_template_root }}"
+    state: directory
+
+- name: enable consul-template
   template:
-    src: cshrc.j2
-    dest: /root/.cshrc
+    src: consul_template.j2
+    dest: /etc/rc.conf.d/consul_template
+  notify:
+    - restart consul-template
+
+- name: configure consul-template
+  template:
+    src: consul-template.conf.j2
+    dest: /usr/local/etc/consul-template.d/consul-template.conf
+  notify:
+    - restart consul-template

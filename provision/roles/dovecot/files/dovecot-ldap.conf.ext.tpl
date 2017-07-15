@@ -17,7 +17,7 @@
 #        by * none
 
 # Space separated list of LDAP hosts to use. host:port is allowed too.
-hosts = {{ hostvars[project].ansible_all_ipv4_addresses[0] }}
+hosts = mail.service.consul
 
 # LDAP URIs to use. You can use this instead of hosts list. Note that this
 # setting isn't supported by all LDAP libraries.

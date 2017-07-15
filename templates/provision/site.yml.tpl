@@ -6,12 +6,8 @@
   hosts: PROJECT
   roles:
     - common
+    - letsencrypt
     - ldap
     - dovecot
     - postfix
     - dkim
-
-- name: PROJECT localhost provisioning
-  hosts: localhost
-  roles:
-    - localhost

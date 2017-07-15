@@ -3,18 +3,12 @@
   with_items: "{{ dkim_packages }}"
   pkgng:
     name: "{{ item.name }}"
-  notify:
-    - update opendkim
-    - restart dkim
 
-- name: configure dkim
-  template:
-    src: opendkim.conf.j2
-    dest: /usr/local/etc/mail/opendkim.conf
-    owner: root
-    group: wheel
-  notify:
-    - restart dkim
+- name: update opendkim
+  shell: make -DBATCH -C /usr/ports/mail/opendkim reinstall clean
+  args:
+    creates: /usr/local/etc/mail/opendkim.conf.sample
+
 
 - name: configure dkim service
   template:
@@ -22,8 +16,6 @@
     dest: /etc/rc.conf.d/milteropendkim
     owner: root
     group: wheel
-  notify:
-    - restart dkim
 
 - name: create port config dir
   file:

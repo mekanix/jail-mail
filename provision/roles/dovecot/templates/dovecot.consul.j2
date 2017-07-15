@@ -1,0 +1,7 @@
+{% for item in dovecot_consul_templates %}
+template {
+  source = "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
+  destination = "{{ item.destination }}"
+  command = "service dovecot restart"
+}
+{% endfor %}

@@ -43,12 +43,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = mail.{{ domain }}
+myhostname = mail.{{ key "domain" }}
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
-myorigin = {{ domain }}
+myorigin = {{ key "domain" }}
 mydestination =
-    mail.{{ domain }}
+    mail.{{ key "domain" }}
     localhost
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
@@ -62,7 +62,7 @@ virtual_mailbox_domains = ldap:domains
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 
-aliases_server_host = {{ hostvars[project].ansible_all_ipv4_addresses[0] }}
+aliases_server_host = mail.service.consul
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
@@ -71,7 +71,7 @@ aliases_cache = yes
 aliases_bind = yes
 aliases_version = 3
 
-domains_server_host = {{ hostvars[project].ansible_all_ipv4_addresses[0] }}
+domains_server_host = mail.service.consul
 domains_search_base = dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
@@ -82,8 +82,8 @@ domains_version = 3
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:{{ hostvars[project].ansible_all_ipv4_addresses[0] }}:8891
-non_smtpd_milters = inet:{{ hostvars[project].ansible_all_ipv4_addresses[0] }}:8891
+smtpd_milters = inet:mail.service.consul:8891
+non_smtpd_milters = inet:mail.service.consul:8891
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400

@@ -1,0 +1,25 @@
+---
+- name: install packages
+  with_items: "{{ letsencrypt_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+
+- name: create consul-template directory for letsencrypt
+  file:
+    path: "/usr/local/etc/consul-templates/{{ letsencrypt_consul_template_prefix }}"
+    state: directory
+
+- name: copy letsencrypt consul-template files
+  with_items: "{{ letsencrypt_consul_templates }}"
+  copy:
+    src: "{{ item.filename }}"
+    dest: "{{ consul_template_root }}/{{ letsencrypt_consul_template_prefix }}/{{ item.filename }}"
+  notify:
+    - restart consul-template
+
+- name: configure consul-template for letsencrypt
+  template:
+    src: letsencrypt.consul.j2
+    dest: /usr/local/etc/consul-template.d/letsencrypt.conf
+  notify:
+    - restart consul-template
