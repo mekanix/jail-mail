@@ -64,7 +64,7 @@ rootdn		"cn=root,dc=ldap"
 # Cleartext passwords, especially for the rootdn, should
 # be avoid.  See slappasswd(8) and slapd.conf(5) for details.
 # Use of strong authentication encouraged.
-rootpw		{{ key "ldap_admin_password" }}
+rootpw		{{ key "ldap/admin/password" }}
 # The database directory MUST exist prior to running slapd AND
 # should only be accessible by the slapd and slap tools.
 # Mode 700 recommended.

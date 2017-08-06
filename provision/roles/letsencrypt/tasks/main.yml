@@ -4,6 +4,12 @@
   pkgng:
     name: "{{ item.name }}"
 
+- name: create root bin directory
+  file:
+    path: /root/bin
+    state: directory
+    mode: 0700
+
 - name: create consul-template directory for letsencrypt
   file:
     path: "/usr/local/etc/consul-templates/{{ letsencrypt_consul_template_prefix }}"
@@ -17,9 +23,21 @@
   notify:
     - restart consul-template
 
+- name: copy letsencrypt hook
+  with_items: "{{ letsencrypt_hook }}"
+  copy:
+    src: "{{ item.filename }}"
+    dest: "{{ item.destination }}/{{ item.filename }}"
+    mode: 0700
+
 - name: configure consul-template for letsencrypt
   template:
     src: letsencrypt.consul.j2
     dest: /usr/local/etc/consul-template.d/letsencrypt.conf
   notify:
     - restart consul-template
+
+- name: register letsencrypt
+  command: dehydrated --register --accept-terms
+  args:
+    creates: /usr/local/bin/accounts
