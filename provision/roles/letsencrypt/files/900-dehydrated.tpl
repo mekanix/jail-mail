@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cd /root
 export PROVIDER={{ key "mail/letsencrypt/provider" }}
 export LEXICON_VULTR_USERNAME={{ key "mail/letsencrypt/username" }}
 export LEXICON_VULTR_TOKEN={{ key "mail/letsencrypt/token" }}

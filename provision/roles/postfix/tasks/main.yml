@@ -18,6 +18,13 @@
     group: wheel
     state: directory
 
+- name: create cert dir
+  file:
+    path: /usr/local/etc/postfix/certs
+    owner: root
+    group: wheel
+    state: directory
+
 - name: configure postfix port
   template:
     src: port-options.j2

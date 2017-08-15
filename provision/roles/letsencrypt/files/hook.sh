@@ -85,6 +85,14 @@ deploy_cert() {
     #   The path of the file containing the full certificate chain.
     # - CHAINFILE
     #   The path of the file containing the intermediate certificate(s).
+
+    # Postfix
+    cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" /usr/local/etc/postfix/certs
+    chmod 600 /usr/local/etc/postfix/certs/*.pem
+
+    # Dovecot
+    cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" /usr/local/etc/dovecot/private
+    chmod 600 /usr/local/etc/dovecot/private/*.pem
 }
 
 unchanged_cert() {

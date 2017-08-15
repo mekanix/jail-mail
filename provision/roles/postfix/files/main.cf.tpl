@@ -13,8 +13,8 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file = </usr/local/bin/certs/{{ key "mail/domain" }}/cert.pem
-smtpd_tls_key_file = </usr/local/bin/certs/{{ key "mail/domain" }}/privkey.pem
+smtpd_tls_cert_file = </usr/local/etc/postfix/certs/cert.pem
+smtpd_tls_key_file = </usr/local/etc/postfix/certs/privkey.pem
 smtpd_use_tls=yes
 smtpd_sasl_type=dovecot
 smtpd_sasl_path=private/auth
