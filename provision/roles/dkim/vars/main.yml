@@ -1,3 +1,12 @@
 ---
 dkim_packages:
   - name: opendkim
+
+dkim_consul_template_prefix: dovecot
+
+dkim_consul_templates:
+  - destination: "/usr/local/etc/mail/opendkim.conf"
+    filename: "opendkim.conf.tpl"
+
+  - destination: "/usr/local/etc/mail/dkim.key"
+    filename: "dkim.key.tpl"

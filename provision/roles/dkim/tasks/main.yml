@@ -4,12 +4,6 @@
   pkgng:
     name: "{{ item.name }}"
 
-- name: update opendkim
-  shell: make -DBATCH -C /usr/ports/mail/opendkim reinstall clean
-  args:
-    creates: /usr/local/etc/mail/opendkim.conf.sample
-
-
 - name: configure dkim service
   template:
     src: milteropendkim.j2
@@ -17,14 +11,30 @@
     owner: root
     group: wheel
 
-- name: create port config dir
+- name: install dkim hook for consul-template
+  copy:
+    src: dkim-consul.sh
+    dest: /usr/local/bin/dkim-consul.sh
+    mode: 0755
+  notify:
+    - restart consul-template
+
+- name: create consul-template directory for dkim
   file:
-    path: /var/db/ports/mail_opendkim
-    owner: root
-    group: wheel
+    path: "/usr/local/etc/consul-templates/{{ dkim_consul_template_prefix }}"
     state: directory
 
-- name: configure port
+- name: copy dkim consul-template files
+  with_items: "{{ dkim_consul_templates }}"
+  copy:
+    src: "{{ item.filename }}"
+    dest: "{{ consul_template_root }}/{{ dkim_consul_template_prefix }}/{{ item.filename }}"
+  notify:
+    - restart consul-template
+
+- name: configure consul-template for dkim
   template:
-    src: port-options.j2
-    dest: /var/db/ports/mail_opendkim/options
+    src: dkim.consul.j2
+    dest: /usr/local/etc/consul-template.d/dkim.conf
+  notify:
+    - restart consul-template

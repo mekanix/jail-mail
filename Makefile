@@ -12,10 +12,10 @@ up: setup
 	@sudo cbsd jcreate jconf=${PWD}/cbsd.conf || true
 	@sudo cp templates/fstab.custom.local /cbsd/jails-fstab/fstab.${PROJECT}.local
 .if !exists(/cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh)
-	@sudo ln -s /usr/local/bin/cbsd-devops-register-jail.sh /cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh
+	@sudo ln -s /usr/local/bin/cbsd-devops /cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh
 .endif
 .if !exists(/cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh)
-	@sudo ln -s /usr/local/bin/cbsd-devops-deregister-jail.sh /cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh
+	@sudo ln -s /usr/local/bin/cbsd-devops /cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh
 .endif
 	@sudo chown ${UID}:${GID} cbsd.conf
 	@sudo cbsd jstart ${PROJECT} || true

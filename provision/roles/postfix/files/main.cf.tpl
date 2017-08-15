@@ -13,8 +13,8 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file=/usr/local/etc/dovecot/dovecot.pem
-smtpd_tls_key_file=/usr/local/etc/dovecot/private/dovecot.pem
+smtpd_tls_cert_file = </usr/local/bin/certs/{{ key "mail/domain" }}/cert.pem
+smtpd_tls_key_file = </usr/local/bin/certs/{{ key "mail/domain" }}/privkey.pem
 smtpd_use_tls=yes
 smtpd_sasl_type=dovecot
 smtpd_sasl_path=private/auth
@@ -43,12 +43,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = mail.{{ key "domain" }}
+myhostname = mail.{{ key "mail/domain" }}
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
-myorigin = {{ key "domain" }}
+myorigin = {{ key "mail/domain" }}
 mydestination =
-    mail.{{ key "domain" }}
+    mail.{{ key "mail/domain" }}
     localhost
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128

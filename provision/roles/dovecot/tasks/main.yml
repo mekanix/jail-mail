@@ -38,7 +38,7 @@
 
 - name: create port config dir
   file:
-    path: /var/db/ports/mail_dovecot2
+    path: /var/db/ports/mail_dovecot
     owner: root
     group: wheel
     state: directory
@@ -46,10 +46,10 @@
 - name: configure dovecot port
   template:
     src: port-options.j2
-    dest: /var/db/ports/mail_dovecot2/options
+    dest: /var/db/ports/mail_dovecot/options
 
 - name: update dovecot
-  shell: make -DBATCH -C /usr/ports/mail/dovecot2 reinstall clean
+  shell: make -DBATCH -C /usr/ports/mail/dovecot reinstall clean
   args:
     creates: /usr/local/lib/dovecot/libdovecot-ldap.so
 

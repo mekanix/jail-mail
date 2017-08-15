@@ -159,7 +159,7 @@
 ##  Specify for which domain(s) signing should be done.  No default; must
 ##  be specified for signing.
 
-Domain			{{ domain }}
+Domain      {{ key "mail/domain" }}
 
 ##  DomainKeysCompat { yes | no }
 ##  	default "no"
@@ -244,7 +244,7 @@ Domain			{{ domain }}
 ##  SigningTable and KeyTable are used.  No default; must be specified for
 ##  signing if SigningTable/KeyTable are not in use.
 
-#KeyFile			/etc/mail/dkim.key
+KeyFile			/usr/local/etc/mail/dkim.key
 
 ##  KeyTable dataset
 ##  	default (none)
@@ -255,7 +255,7 @@ Domain			{{ domain }}
 ##  a base64-encoded DER format private key, or a path to a file containing
 ##  one of those.
 
-KeyTable		ldap://{{ hostvars[project].ansible_all_ipv4_addresses[0] }}/dc=ldap?DKIMDomain,DKIMSelectorData,DKIMKeyData,?sub?(DKIMSelectorData=$d)
+# KeyTable		dataset
 
 ##  LogWhy { yes | no }
 ##  	default "no"
@@ -629,7 +629,7 @@ Selector		mail
 ##  is set, all possible lookup keys will be attempted which may result
 ##  in multiple signatures being applied.
 
-SigningTable		ldap://{{ hostvars[project].ansible_all_ipv4_addresses[0] }}/dc=ldap?DKIMSelectorData?sub?(mail=$d)
+# SigningTable		filename
 
 ##  SingleAuthResult { yes | no}
 ##  	default "no"

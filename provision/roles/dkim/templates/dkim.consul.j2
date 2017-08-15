@@ -1,0 +1,7 @@
+{% for item in dkim_consul_templates %}
+template {
+  source = "{{ consul_template_root }}/{{ dkim_consul_template_prefix }}/{{ item.filename }}"
+  destination = "{{ item.destination }}"
+  command = "/usr/local/bin/dkim-consul.sh"
+}
+{% endfor %}
