@@ -1,7 +1,0 @@
-{% for item in letsencrypt_consul_templates %}
-template {
-  source = "{{ consul_template_root }}/{{ letsencrypt_consul_template_prefix }}/{{ item.filename }}"
-  destination = "{{ item.destination }}"
-  command = "chmod 755 {{ item.destination }}"
-}
-{% endfor %}

@@ -1,0 +1,4 @@
+dn: ou=DOMAIN,dc=ldap
+objectClass: top
+objectClass: organizationalUnit
+ou: DOMAIN

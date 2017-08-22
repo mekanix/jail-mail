@@ -1,0 +1,18 @@
+dn: uid=USER,ou=DOMAIN,dc=ldap
+objectClass: top
+objectClass: person
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: pilotPerson
+cn: Mailing List
+sn: List
+uid: USER
+uidNumber: 65534
+gidNumber: 65534
+homeDirectory: /var/mail/DOMAIN/USER
+loginShell: /bin/false
+gecos: System User
+shadowLastChange: 13979
+shadowMax: 45
+mail: USER@DOMAIN
+userClass: mail
