@@ -11,14 +11,6 @@
     owner: root
     group: wheel
 
-- name: install dkim hook for consul-template
-  copy:
-    src: dkim-consul.sh
-    dest: /usr/local/bin/dkim-consul.sh
-    mode: 0755
-  notify:
-    - restart consul-template
-
 - name: create consul-template directory for dkim
   file:
     path: "/usr/local/etc/consul-templates/{{ dkim_consul_template_prefix }}"

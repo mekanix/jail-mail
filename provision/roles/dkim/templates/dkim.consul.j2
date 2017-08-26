@@ -2,6 +2,6 @@
 template {
   source = "{{ consul_template_root }}/{{ dkim_consul_template_prefix }}/{{ item.filename }}"
   destination = "{{ item.destination }}"
-  command = "/usr/local/bin/dkim-consul.sh"
+  command = "sh -c 'chmod 600 {{ item.destination }} && service milter-opendkim restart'"
 }
 {% endfor %}

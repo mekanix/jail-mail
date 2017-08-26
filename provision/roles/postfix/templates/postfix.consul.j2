@@ -5,3 +5,11 @@ template {
   command = "service postfix restart"
 }
 {% endfor %}
+
+{% for item in postfix_consul_certs %}
+template {
+  source = "{{ consul_template_root }}/{{ postfix_consul_template_prefix }}/{{ item.filename }}"
+  destination = "{{ item.destination }}"
+  command = "sh -c 'chmod 600 {{ item.destination }} && service postfix restart'"
+}
+{% endfor %}

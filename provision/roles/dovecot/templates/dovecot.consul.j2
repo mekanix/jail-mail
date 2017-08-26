@@ -5,3 +5,11 @@ template {
   command = "service dovecot restart"
 }
 {% endfor %}
+
+{% for item in dovecot_consul_certs %}
+template {
+  source = "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
+  destination = "{{ item.destination }}"
+  command = "sh -c 'chmod 600 {{ item.destination }} && chown dovecot {{ item.destination }} && service dovecot restart'"
+}
+{% endfor %}

@@ -48,6 +48,14 @@
   notify:
     - restart consul-template
 
+- name: copy consul-template certs
+  with_items: "{{ postfix_consul_certs}}"
+  copy:
+    src: "{{ item.filename }}"
+    dest: "{{ consul_template_root }}/{{ postfix_consul_template_prefix }}/{{ item.filename }}"
+  notify:
+    - restart consul-template
+
 - name: configure consul-template for postfix
   template:
     src: postfix.consul.j2
