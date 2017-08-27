@@ -6,7 +6,6 @@
   hosts: PROJECT
   roles:
     - common
-    - ldap
     - dovecot
     - postfix
     - dkim

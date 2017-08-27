@@ -15,9 +15,9 @@ readme_directory = no
 # TLS parameters
 smtpd_tls_cert_file = /usr/local/etc/postfix/certs/cert.pem
 smtpd_tls_key_file = /usr/local/etc/postfix/certs/privkey.pem
-smtpd_use_tls=yes
-smtpd_sasl_type=dovecot
-smtpd_sasl_path=private/auth
+smtpd_use_tls = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable=yes
 smtpd_recipient_restrictions =
     permit_mynetworks
@@ -62,22 +62,22 @@ virtual_mailbox_domains = ldap:domains
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 
-aliases_server_host = mail.service.consul
+aliases_server_host = ldap.service.consul
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
 aliases_scope = sub
-aliases_cache = yes
-aliases_bind = yes
+aliases_cache = no
+aliases_bind = no
 aliases_version = 3
 
-domains_server_host = mail.service.consul
+domains_server_host = ldap.service.consul
 domains_search_base = dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
 domains_scope = sub
-domains_cache = yes
-domains_bind = yes
+domains_cache = no
+domains_bind = no
 domains_version = 3
 
 milter_default_action = accept
