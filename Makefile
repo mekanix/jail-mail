@@ -38,3 +38,12 @@ login:
 
 exec:
 	@sudo cbsd jexec jname=${PROJECT} ${command}
+
+export: down
+.if !exists(build)
+	@mkdir build
+.endif
+	@echo -n "Exporting jail ... "
+	@sudo cbsd jexport jname=${PROJECT}
+	@sudo mv /cbsd/export/${PROJECT}.img build/
+	@sudo chown ${UID}:${GID} build/${PROJECT}.img

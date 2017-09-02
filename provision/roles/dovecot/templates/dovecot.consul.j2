@@ -2,7 +2,7 @@
 template {
   source = "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
   destination = "{{ item.destination }}"
-  command = "service dovecot restart"
+  command = "sh -c 'service dovecot restart || true'"
 }
 {% endfor %}
 
@@ -10,6 +10,6 @@ template {
 template {
   source = "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
   destination = "{{ item.destination }}"
-  command = "sh -c 'chmod 600 {{ item.destination }} && chown dovecot {{ item.destination }} && service dovecot restart'"
+  command = "sh -c 'chmod 600 {{ item.destination }} && chown dovecot {{ item.destination }} && service dovecot restart || true'"
 }
 {% endfor %}

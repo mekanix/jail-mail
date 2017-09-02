@@ -4,12 +4,12 @@ objectClass: person
 objectClass: posixAccount
 objectClass: shadowAccount
 objectClass: pilotPerson
-cn: Mailing List
-sn: List
+cn: FIRST LAST
+sn: LAST
 uid: USER
 uidNumber: 65534
 gidNumber: 65534
-homeDirectory: /var/mail/DOMAIN/USER
+homeDirectory: /var/mail/domains/DOMAIN/USER
 loginShell: /bin/false
 gecos: System User
 shadowLastChange: 13979

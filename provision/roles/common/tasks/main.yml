@@ -19,17 +19,6 @@
   pkgng:
     name: "{{ item.name }}"
 
-- name: create certs dir
-  file:
-    path: /etc/ssl/certs
-    state: directory
-
-- name: create private certs dir
-  file:
-    path: /etc/ssl/private
-    mode: 0700
-    state: directory
-
 - name: create consul-template config dir
   file:
     path: /usr/local/etc/consul-template.d
