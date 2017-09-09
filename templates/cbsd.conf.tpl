@@ -3,7 +3,7 @@
 relative_path="1";
 jname="PROJECT";
 path="/cbsd/jails/PROJECT";
-host_hostname="PROJECT.DOMAIN";
+host_hostname="PROJECT";
 ip4_addr="DHCP";
 mount_devfs="1";
 allow_mount="1";

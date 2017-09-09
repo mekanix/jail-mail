@@ -118,12 +118,12 @@ bsmtp     unix  -       n       n       -       -       pipe
   flags=Fq. user=bsmtp argv=/usr/lib/bsmtp/bsmtp -t$nexthop -f$sender $recipient
 scalemail-backend unix	-	n	n	-	2	pipe
   flags=R user=scalemail argv=/usr/lib/scalemail/bin/scalemail-store ${nexthop} ${user} ${extension}
-mailman   unix  -       n       n       -       -       pipe
-  flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
-  ${nexthop} ${user}
 
 policy  unix  -       n       n       -       0        spawn
   user=nobody argv=/usr/local/bin/policyd-spf
 
 dovecot unix    -       n       n       -       -       pipe
   flags=DRhu user=nobody:nobody argv=/usr/local/libexec/dovecot/deliver -d ${recipient}
+
+mlmmj   unix  -       n       n       -       -       pipe
+  flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-receive -F -L /usr/home/mlmmj/lists/$nexthop

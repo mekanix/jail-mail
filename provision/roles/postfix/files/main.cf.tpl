@@ -51,11 +51,12 @@ mydestination =
     mail.{{ key "mail/domain" }}
     localhost
 relayhost =
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mynetworks = 127.0.0.0/8 10.0.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_transport = dovecot
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
+transport_maps = hash:/usr/local/etc/postfix/transport
 
 virtual_alias_maps = ldap:aliases
 virtual_mailbox_domains = ldap:domains

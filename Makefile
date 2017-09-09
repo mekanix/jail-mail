@@ -12,10 +12,10 @@ up: setup
 	@sudo cbsd jcreate jconf=${PWD}/cbsd.conf || true
 	@sudo cp templates/fstab.custom.local /cbsd/jails-fstab/fstab.${PROJECT}.local
 .if !exists(/cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh)
-	@sudo ln -s /usr/local/bin/cbsd-devops /cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh
+	@sudo ln -s /usr/local/bin/reggae /cbsd/jails-system/${PROJECT}/master_poststart.d/register.sh
 .endif
 .if !exists(/cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh)
-	@sudo ln -s /usr/local/bin/cbsd-devops /cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh
+	@sudo ln -s /usr/local/bin/reggae /cbsd/jails-system/${PROJECT}/master_poststop.d/deregister.sh
 .endif
 	@sudo chown ${UID}:${GID} cbsd.conf
 	@sudo cbsd jstart ${PROJECT} || true
@@ -30,8 +30,8 @@ destroy: down
 setup:
 	@sed -e "s:PROJECT:${PROJECT}:g" templates/provision/site.yml.tpl >provision/site.yml
 	@sed -e "s:PROJECT:${PROJECT}:g" templates/provision/inventory.${STAGE}.tpl >provision/inventory/${INVENTORY}
-	@sed -e "s:PROJECT:${PROJECT}:g" -e "s:DOMAIN:${DOMAIN}:g" templates/cbsd.conf.tpl >cbsd.conf
-	@sed -e "s:PROJECT:${PROJECT}:g" -e "s:DOMAIN:${DOMAIN}:g" templates/provision/group_vars/all.tpl >provision/group_vars/all
+	@sed -e "s:PROJECT:${PROJECT}:g" templates/cbsd.conf.tpl >cbsd.conf
+	@sed -e "s:PROJECT:${PROJECT}:g" templates/provision/group_vars/all.tpl >provision/group_vars/all
 
 login:
 	@sudo cbsd jlogin ${PROJECT}

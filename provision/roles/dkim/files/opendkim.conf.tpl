@@ -691,7 +691,7 @@ Socket			inet:8891
 ##
 ##  Sign for subdomains as well?
 
-# SubDomains		No
+SubDomains		Yes
 
 ##  Syslog { yes | no }
 ##  	default "yes"
