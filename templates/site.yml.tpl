@@ -2,8 +2,8 @@
 # vi: set ft=ansible :
 
 ---
-- name: PROJECT provisioning
-  hosts: PROJECT
+- name: SERVICE provisioning
+  hosts: SERVICE
   roles:
     - common
     - dovecot
