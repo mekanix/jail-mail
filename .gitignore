@@ -1,8 +1,7 @@
-.vagrant/
+.provisioned
 *.retry
-provision/group_vars/all
-provision/inventory/localhost
-provision/site.yml
+playbook/group_vars/all
+playbook/inventory/localhost
+playbook/site.yml
 cbsd.conf
-backup.ldif
 vars.mk
