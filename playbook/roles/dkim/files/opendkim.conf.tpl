@@ -159,7 +159,7 @@
 ##  Specify for which domain(s) signing should be done.  No default; must
 ##  be specified for signing.
 
-Domain      {{ key "mail/domain" }}
+Domain      *
 
 ##  DomainKeysCompat { yes | no }
 ##  	default "no"
