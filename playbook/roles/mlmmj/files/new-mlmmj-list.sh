@@ -32,7 +32,8 @@ fi
 
 printf "${LIST_URL}\n${OWNER}\n\ny\n" | mlmmj-make-ml -L "${LIST_NAME}" -s /usr/home/mlmmj/lists -c mlmmj
 echo "Reply-To: ${LIST_ADDRESS}" >"/usr/home/mlmmj/lists/${LIST_NAME}/control/customheaders"
-echo "To unsubscribe send email to ${LIST_NAME}+unsubscribe@${LIST_URL}" >"/usr/home/mlmmj/lists/${LIST_NAME}/control/footer"
+echo -e "\n---\nTo unsubscribe send email to ${LIST_NAME}+unsubscribe@${LIST_URL}" >"/usr/home/mlmmj/lists/${LIST_NAME}/control/footer"
+echo "[${LIST_NAME}]" >"/usr/home/mlmmj/lists/${LIST_NAME}/control/prefix"
 echo "${LIST_URL}--${LIST_NAME}@localhost.mlmmj mlmmj:${LIST_NAME}" >>/usr/local/etc/postfix/transport
 postmap /usr/local/etc/postfix/transport
 service postfix reload

@@ -63,7 +63,7 @@ virtual_mailbox_domains = ldap:domains
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 
-aliases_server_host = ldap.service.consul
+aliases_server_host = ldap.my.domain
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
@@ -72,7 +72,7 @@ aliases_cache = no
 aliases_bind = no
 aliases_version = 3
 
-domains_server_host = ldap.service.consul
+domains_server_host = ldap.my.domain
 domains_search_base = dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
@@ -83,8 +83,8 @@ domains_version = 3
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:mail.service.consul:8891
-non_smtpd_milters = inet:mail.service.consul:8891
+smtpd_milters = inet:mail.my.domain:8891
+non_smtpd_milters = inet:mail.my.domain:8891
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400

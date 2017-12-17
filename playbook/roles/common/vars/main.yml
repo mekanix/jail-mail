@@ -1,6 +1,0 @@
----
-common_packages:
-  - name: ca_root_nss
-  - name: consul-template
-
-consul_template_root: /usr/local/etc/consul-templates

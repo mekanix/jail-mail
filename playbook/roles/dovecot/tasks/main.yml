@@ -49,7 +49,7 @@
     dest: /var/db/ports/mail_dovecot/options
 
 - name: update dovecot
-  shell: make -DBATCH -C /usr/ports/mail/dovecot reinstall clean
+  shell: make -DBATCH -C /usr/ports/mail/dovecot && make deinstall -DBATCH -C /usr/ports/mail/dovecot && make install clean -DBATCH -C /usr/ports/mail/dovecot
   args:
     creates: /usr/local/lib/dovecot/libdovecot-ldap.so
 

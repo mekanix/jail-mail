@@ -5,7 +5,7 @@
 - name: SERVICE provisioning
   hosts: SERVICE
   roles:
-    - common
+    - onelove-roles.freebsd-common
     - dovecot
     - postfix
     - dkim

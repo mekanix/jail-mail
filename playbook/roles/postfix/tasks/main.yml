@@ -31,7 +31,7 @@
     dest: /var/db/ports/mail_postfix/options
 
 - name: update postfix
-  shell: make -DBATCH -C /usr/ports/mail/postfix reinstall clean
+  shell: make -DBATCH -C /usr/ports/mail/postfix && make deinstall -DBATCH -C /usr/ports/mail/postfix && make install clean -DBATCH -C /usr/ports/mail/postfix
   args:
     creates: /usr/local/lib/postfix/postfix-ldap.so
 

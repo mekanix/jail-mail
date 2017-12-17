@@ -21,12 +21,8 @@
   copy:
     src: "{{ item.filename }}"
     dest: "{{ consul_template_root }}/{{ dkim_consul_template_prefix }}/{{ item.filename }}"
-  notify:
-    - restart consul-template
 
 - name: configure consul-template for dkim
   template:
     src: dkim.consul.j2
     dest: /usr/local/etc/consul-template.d/dkim.conf
-  notify:
-    - restart consul-template
