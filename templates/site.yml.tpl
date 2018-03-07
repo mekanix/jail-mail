@@ -6,6 +6,7 @@
   hosts: SERVICE
   roles:
     - onelove-roles.freebsd-common
+    - onelove-roles.freebsd-consul-template
     - dovecot
     - postfix
     - dkim
