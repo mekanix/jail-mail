@@ -1,0 +1,26 @@
+---
+- name: install packages
+  with_items: "{{ rspamd_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+
+- name: configure rspamd service
+  template:
+    src: rspamd.j2
+    dest: /etc/rc.conf.d/rspamd
+    owner: root
+    group: wheel
+  notify:
+    - restart rspamd
+
+- name: create local.d
+  file:
+    path: /usr/local/etc/rspamd/local.d
+    state: directory
+
+- name: configure dkim signing
+  template:
+    src: dkim_signing.conf.j2
+    dest: /usr/local/etc/rspamd/local.d/dkim_signing.conf
+  notify:
+    - restart rspamd

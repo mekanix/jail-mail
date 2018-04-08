@@ -1,7 +1,6 @@
 ---
 postfix_packages:
   - name: postfix
-  - name: py27-postfix-policyd-spf-python
 
 postfix_consul_template_prefix: postfix
 

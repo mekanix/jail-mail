@@ -7,7 +7,7 @@
   roles:
     - onelove-roles.freebsd-common
     - onelove-roles.freebsd-consul-template
+    - rspamd
     - dovecot
     - postfix
-    - dkim
     - mlmmj
