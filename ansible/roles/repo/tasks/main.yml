@@ -1,0 +1,13 @@
+---
+- name: create pkg repo dir
+  file:
+    path: /usr/local/etc/pkg/repos
+    state: directory
+
+- name: configure custom repository
+  template:
+    src: custom.conf.j2
+    dest: /usr/local/etc/pkg/repos/custom.conf
+
+- name: update pkg repos
+  command: pkg update

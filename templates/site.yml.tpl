@@ -7,6 +7,7 @@
   roles:
     - onelove-roles.freebsd-common
     - onelove-roles.freebsd-consul-template
+    - repo
     - rspamd
     - dovecot
     - postfix
