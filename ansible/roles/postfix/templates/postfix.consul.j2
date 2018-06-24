@@ -2,7 +2,7 @@
 template {
   source = "{{ consul_template_root }}/{{ postfix_consul_template_prefix }}/{{ item.filename }}"
   destination = "{{ item.destination }}"
-  command = "service postfix restart"
+  command = "sh -c 'service postfix restart || true'"
 }
 {% endfor %}
 
