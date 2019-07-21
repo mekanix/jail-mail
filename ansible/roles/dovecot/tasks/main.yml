@@ -36,30 +36,8 @@
     groups: mail
     append: yes
 
-- name: create consul-template directory for dovecot
-  file:
-    path: "/usr/local/etc/consul-templates/{{ dovecot_consul_template_prefix }}"
-    state: directory
-
-- name: copy dovecot consul-template files
-  with_items: "{{ dovecot_consul_templates }}"
-  copy:
-    src: "{{ item.filename }}"
-    dest: "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
-  notify:
-    - restart consul-template
-
-- name: copy consul-template certs
-  with_items: "{{ dovecot_consul_certs}}"
-  copy:
-    src: "{{ item.filename }}"
-    dest: "{{ consul_template_root }}/{{ dovecot_consul_template_prefix }}/{{ item.filename }}"
-  notify:
-    - restart consul-template
-
-- name: configure consul-template for dovecot
+- name: configuring dovecot
+  with_items: "{{ dovecot_templates }}"
   template:
-    src: dovecot.consul.j2
-    dest: /usr/local/etc/consul-template.d/dovecot.conf
-  notify:
-    - restart consul-template
+    src: "{{ item.filename }}.tpl"
+    dest: "{{ item.destination }}/{{ item.filename }}"

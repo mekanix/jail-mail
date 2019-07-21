@@ -4,10 +4,21 @@
     path: /usr/local/etc/pkg/repos
     state: directory
 
-- name: configure custom repository
+- name: configure tilda repository
   template:
-    src: custom.conf.j2
-    dest: /usr/local/etc/pkg/repos/custom.conf
+    src: tilda.conf.j2
+    dest: /usr/local/etc/pkg/repos/tilda.conf
+
+- name: create ssl certs directory
+  file:
+    path: /usr/local/etc/ssl/certs
+    state: directory
+
+- name: get tilda certificate
+  get_url:
+    url: https://pkg.tilda.center/certs/tilda.cert
+    dest: /usr/local/etc/ssl/certs/tilda.cert
+    mode: 0644
 
 - name: update pkg repos
   command: pkg update

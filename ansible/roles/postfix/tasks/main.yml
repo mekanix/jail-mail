@@ -18,30 +18,8 @@
     group: wheel
     state: directory
 
-- name: create consul-template directory for postfix
-  file:
-    path: "/usr/local/etc/consul-templates/{{ postfix_consul_template_prefix }}"
-    state: directory
-
-- name: copy consul-template files
-  with_items: "{{ postfix_consul_templates }}"
+- name: configure postfix
+  with_items: "{{ postfix_templates }}"
   copy:
-    src: "{{ item.filename }}"
-    dest: "{{ consul_template_root }}/{{ postfix_consul_template_prefix }}/{{ item.filename }}"
-  notify:
-    - restart consul-template
-
-- name: copy consul-template certs
-  with_items: "{{ postfix_consul_certs}}"
-  copy:
-    src: "{{ item.filename }}"
-    dest: "{{ consul_template_root }}/{{ postfix_consul_template_prefix }}/{{ item.filename }}"
-  notify:
-    - restart consul-template
-
-- name: configure consul-template for postfix
-  template:
-    src: postfix.consul.j2
-    dest: /usr/local/etc/consul-template.d/postfix.conf
-  notify:
-    - restart consul-template
+    src: "{{ item.filename }}.tpl"
+    dest: "{{ item.destination }}/{{ item.filename }}"

@@ -3,51 +3,36 @@ dovecot_packages:
   - name: dovecot
   - name: dovecot-pigeonhole
 
-dovecot_consul_template_prefix: dovecot
+dovecot_templates:
+  - destination: /usr/local/etc/dovecot
+    filename: dovecot.conf
 
-dovecot_consul_templates:
-  - destination: /usr/local/etc/dovecot/dovecot.conf
-    filename: dovecot.conf.tpl
+  - destination: /usr/local/etc/dovecot
+    filename: dovecot-ldap.conf.ext
 
-  - destination: /usr/local/etc/dovecot/dovecot-ldap.conf.ext
-    filename: dovecot-ldap.conf.ext.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 10-auth.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/10-auth.conf
-    filename: 10-auth.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 10-master.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/10-master.conf
-    filename: 10-master.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 10-mail.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/10-mail.conf
-    filename: 10-mail.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 10-ssl.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/10-ssl.conf
-    filename: 10-ssl.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 15-lda.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/15-lda.conf
-    filename: 15-lda.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 20-lmtp.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/20-lmtp.conf
-    filename: 20-lmtp.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 20-managesieve.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/20-managesieve.conf
-    filename: 20-managesieve.conf.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: 90-sieve.conf
 
-  - destination: /usr/local/etc/dovecot/conf.d/90-sieve.conf
-    filename: 90-sieve.conf.tpl
-
-  - destination: /usr/local/etc/dovecot/conf.d/auth-ldap.conf.ext
-    filename: auth-ldap.conf.ext.tpl
-
-dovecot_consul_certs:
-  - destination: /usr/local/etc/dovecot/private/cert.pem
-    filename: cert.pem.tpl
-
-  - destination: /usr/local/etc/dovecot/private/chain.pem
-    filename: chain.pem.tpl
-
-  - destination: /usr/local/etc/dovecot/private/fullchain.pem
-    filename: fullchain.pem.tpl
-
-  - destination: /usr/local/etc/dovecot/private/privkey.pem
-    filename: privkey.pem.tpl
+  - destination: /usr/local/etc/dovecot/conf.d
+    filename: auth-ldap.conf.ext

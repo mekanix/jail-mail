@@ -1,28 +1,14 @@
 ---
 postfix_packages:
   - name: postfix
+  - name: py36-postfix-policyd-spf-python
 
-postfix_consul_template_prefix: postfix
+postfix_templates:
+  - destination: /usr/local/etc/postfix
+    filename: master.cf
 
-postfix_consul_templates:
-  - destination: /usr/local/etc/postfix/master.cf
-    filename: master.cf.tpl
+  - destination: /usr/local/etc/postfix
+    filename: main.cf
 
-  - destination: /usr/local/etc/postfix/main.cf
-    filename: main.cf.tpl
-
-  - destination: /usr/local/etc/postfix-policyd-spf-python/policyd-spf.conf
-    filename: policyd-spf.conf.tpl
-
-postfix_consul_certs:
-  - destination: /usr/local/etc/postfix/certs/cert.pem
-    filename: cert.pem.tpl
-
-  - destination: /usr/local/etc/postfix/certs/chain.pem
-    filename: chain.pem.tpl
-
-  - destination: /usr/local/etc/postfix/certs/fullchain.pem
-    filename: fullchain.pem.tpl
-
-  - destination: /usr/local/etc/postfix/certs/privkey.pem
-    filename: privkey.pem.tpl
+  - destination: /usr/local/etc/postfix-policyd-spf-python
+    filename: policyd-spf.conf
