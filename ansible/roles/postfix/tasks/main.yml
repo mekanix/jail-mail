@@ -3,6 +3,8 @@
   with_items: "{{ postfix_packages }}"
   pkgng:
     name: "{{ item.name }}"
+  notify:
+    - restart postfix
 
 - name: confgure postfix service
   template:
@@ -20,6 +22,8 @@
 
 - name: configure postfix
   with_items: "{{ postfix_templates }}"
-  copy:
+  template:
     src: "{{ item.filename }}.tpl"
     dest: "{{ item.destination }}/{{ item.filename }}"
+  notify:
+    - restart postfix

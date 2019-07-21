@@ -13,8 +13,8 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file = /usr/local/etc/postfix/certs/cert.pem
-smtpd_tls_key_file = /usr/local/etc/postfix/certs/privkey.pem
+smtpd_tls_cert_file = /etc/certs/{{ mail_domain }}/cert.pem
+smtpd_tls_key_file = /etc/certs/{{ mail_domain }}/privkey.pem
 smtpd_use_tls = yes
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
@@ -43,12 +43,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = mail.{{ key "mail/domain" }}
+myhostname = mail.{{ mail_domain }}
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
-myorigin = {{ key "mail/domain" }}
+myorigin = {{ mail_domain }}
 mydestination =
-    mail.{{ key "mail/domain" }}
+    mail.{{ mail_domain }}
     localhost
 relayhost =
 mynetworks = 127.0.0.0/8 10.0.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
@@ -63,7 +63,7 @@ virtual_mailbox_domains = ldap:domains
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 
-aliases_server_host = ldap.my.domain
+aliases_server_host = ldap
 aliases_search_base = ou=%d, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
@@ -72,7 +72,7 @@ aliases_cache = no
 aliases_bind = no
 aliases_version = 3
 
-domains_server_host = ldap.my.domain
+domains_server_host = ldap
 domains_search_base = dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
@@ -83,8 +83,8 @@ domains_version = 3
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:mail.my.domain:8891
-non_smtpd_milters = inet:mail.my.domain:8891
+smtpd_milters = inet:mail:8891
+non_smtpd_milters = inet:mail:8891
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400

@@ -9,8 +9,8 @@ ssl = yes
 # dropping root privileges, so keep the key file unreadable by anyone but
 # root. Included doc/mkcert.sh can be used to easily generate self-signed
 # certificate, just make sure to update the domains in dovecot-openssl.cnf
-ssl_cert = </usr/local/etc/dovecot/private/cert.pem
-ssl_key = </usr/local/etc/dovecot/private/privkey.pem
+ssl_cert = </etc/certs/{{ mail_domain }}/cert.pem
+ssl_key = </etc/certs/{{ mail_domain }}/privkey.pem
 
 # If key file is password protected, give the password here. Alternatively
 # give it when starting dovecot with -p parameter. Since this file is often

@@ -3,6 +3,8 @@
   with_items: "{{ rspamd_packages }}"
   pkgng:
     name: "{{ item.name }}"
+  notify:
+    - restart rspamd
 
 - name: configure rspamd service
   template:
