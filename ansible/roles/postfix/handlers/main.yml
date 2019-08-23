@@ -1,4 +1,7 @@
 ---
+- name: refresh transport
+  shell: /usr/local/sbin/postmap /usr/local/etc/postfix/transport
+
 - name: restart postfix
   service:
     name: postfix

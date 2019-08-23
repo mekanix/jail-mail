@@ -4,35 +4,23 @@ dovecot_packages:
   - name: dovecot-pigeonhole
 
 dovecot_templates:
-  - destination: /usr/local/etc/dovecot
-    filename: dovecot.conf
+  - src: dovecot.conf
+    dest: ""
 
-  - destination: /usr/local/etc/dovecot
-    filename: dovecot-ldap.conf.ext
+  - src: dovecot-ldap.conf.ext
+    dest: ""
 
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 10-auth.conf
+  - src: 10-auth.conf
+    dest: conf.d
 
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 10-master.conf
+  - src: 10-mail.conf
+    dest: conf.d
 
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 10-mail.conf
+  - src: 10-master.conf
+    dest: conf.d
 
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 10-ssl.conf
+  - src: 10-ssl.conf
+    dest: conf.d
 
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 15-lda.conf
-
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 20-lmtp.conf
-
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 20-managesieve.conf
-
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: 90-sieve.conf
-
-  - destination: /usr/local/etc/dovecot/conf.d
-    filename: auth-ldap.conf.ext
+  - src: auth-ldap.conf.ext
+    dest: conf.d

@@ -15,4 +15,5 @@ gecos: System User
 shadowLastChange: 13979
 shadowMax: 45
 mail: USER@DOMAIN
+userClass: jabber
 userClass: mail

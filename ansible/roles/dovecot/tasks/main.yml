@@ -3,6 +3,8 @@
   with_items: "{{ dovecot_packages }}"
   pkgng:
     name: "{{ item.name }}"
+  notify:
+    - restart dovecot
 
 - name: enable dovecot
   template:
@@ -13,6 +15,8 @@
   shell: "cp -r /usr/local/etc/dovecot/example-config/* /usr/local/etc/dovecot/"
   args:
     creates: /usr/local/etc/dovecot/dovecot.conf
+  notify:
+    - restart dovecot
 
 - name: create private directory
   file:
@@ -36,8 +40,10 @@
     groups: mail
     append: yes
 
-- name: configuring dovecot
+- name: configure
   with_items: "{{ dovecot_templates }}"
   template:
-    src: "{{ item.filename }}.tpl"
-    dest: "{{ item.destination }}/{{ item.filename }}"
+    src: "{{ item.src }}.j2"
+    dest: "/usr/local/etc/dovecot/{{ item.dest }}/{{ item.src }}"
+  notify:
+    - restart dovecot

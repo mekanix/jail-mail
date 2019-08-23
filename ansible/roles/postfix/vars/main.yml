@@ -1,7 +1,6 @@
 ---
 postfix_packages:
   - name: postfix
-  - name: py36-postfix-policyd-spf-python
 
 postfix_templates:
   - destination: /usr/local/etc/postfix
@@ -9,6 +8,3 @@ postfix_templates:
 
   - destination: /usr/local/etc/postfix
     filename: main.cf
-
-  - destination: /usr/local/etc/postfix-policyd-spf-python
-    filename: policyd-spf.conf

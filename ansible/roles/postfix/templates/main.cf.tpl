@@ -13,7 +13,7 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file = /etc/certs/{{ mail_domain }}/cert.pem
+smtpd_tls_cert_file = /etc/certs/{{ mail_domain }}/fullchain.pem
 smtpd_tls_key_file = /etc/certs/{{ mail_domain }}/privkey.pem
 smtpd_use_tls = yes
 smtpd_sasl_type = dovecot
@@ -27,7 +27,7 @@ smtpd_recipient_restrictions =
     reject_non_fqdn_helo_hostname
     reject_non_fqdn_sender
     reject_unauth_destination
-    check_policy_service unix:private/policy
+#    check_policy_service unix:private/policy
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtpd_client_restrictions = permit_mynetworks
 smtpd_helo_required = yes
