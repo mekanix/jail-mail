@@ -26,3 +26,13 @@
     dest: /usr/local/etc/rspamd/local.d/dkim_signing.conf
   notify:
     - restart rspamd
+
+- name: create dkim directory
+  file:
+    path: /var/db/rspamd/dkim
+    state: directory
+
+- name: generate dkim key
+  shell: rspamadm dkim_keygen -s mail -k "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key" -d "{{ mail_domain }}" >"/var/db/rspamd/dkim/{{ mail_domain }}.mail.public"
+  notify:
+    - restart rspamd
