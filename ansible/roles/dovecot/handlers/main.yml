@@ -9,3 +9,6 @@
 
 - name: compile spam
   command: sievec /usr/local/etc/dovecot/sieve/report-spam.sieve
+
+- name: compile routing
+  command: sievec /usr/local/etc/dovecot/sieve/after.sieve

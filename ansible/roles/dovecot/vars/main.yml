@@ -46,9 +46,3 @@ dovecot_templates:
 
   - src: auth-ldap.conf.ext
     dest: conf.d
-
-  - src: report-ham.sieve
-    dest: sieve
-
-  - src: report-spam.sieve
-    dest: sieve

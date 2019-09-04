@@ -53,8 +53,27 @@
     dest: "/usr/local/etc/dovecot/{{ item.dest }}/{{ item.src }}"
   notify:
     - restart dovecot
+
+- name: configure ham filter
+  template:
+    src: "report-ham.sieve.j2"
+    dest: "/usr/local/etc/dovecot/sieve/report-ham.sieve"
+  notify:
     - compile ham
+
+- name: configure spam filter
+  template:
+    src: "report-spam.sieve.j2"
+    dest: "/usr/local/etc/dovecot/sieve/report-spam.sieve"
+  notify:
     - compile spam
+
+- name: configure spam routing
+  template:
+    src: "after.sieve.j2"
+    dest: "/usr/local/etc/dovecot/sieve/after.sieve"
+  notify:
+    - compile routing
 
 - name: add learning scripts
   with_items: "{{ dovecot_scripts }}"

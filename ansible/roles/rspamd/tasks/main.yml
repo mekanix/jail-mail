@@ -34,6 +34,13 @@
   notify:
     - restart rspamd
 
+- name: configure milter
+  template:
+    src: milter_headers.conf.j2
+    dest: /usr/local/etc/rspamd/local.d/milter_headers.conf
+  notify:
+    - restart rspamd
+
 - name: create dkim directory
   file:
     path: /var/db/rspamd/dkim

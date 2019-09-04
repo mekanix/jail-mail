@@ -1,7 +1,4 @@
-# See /usr/share/postfix/main.cf.dist for a commented, more complete version
-
-
-smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+smtpd_banner = $myhostname ESMTP $mail_name
 biff = no
 
 # appending .domain is the MUA's job.
@@ -82,7 +79,6 @@ domains_bind = no
 domains_version = 3
 
 milter_default_action = accept
-milter_protocol = 2
 smtpd_milters = inet:mail:11332
 non_smtpd_milters = inet:mail:11332
 
