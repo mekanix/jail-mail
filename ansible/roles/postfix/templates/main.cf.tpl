@@ -43,12 +43,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = mail.{{ mail_domain }}
+myhostname = comms.{{ mail_domain }}
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
 myorigin = {{ mail_domain }}
 mydestination =
-    mail.{{ mail_domain }}
+    comms.{{ mail_domain }}
     localhost
 relayhost =
 mynetworks = 127.0.0.0/8 10.0.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
@@ -83,8 +83,8 @@ domains_version = 3
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:mail:8891
-non_smtpd_milters = inet:mail:8891
+smtpd_milters = inet:mail:11332
+non_smtpd_milters = inet:mail:11332
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400

@@ -1,0 +1,7 @@
+# Included from top-level .conf file
+
+count = 1;
+password = "q1";
+secure_ip = "{{ hostvars[inventory_hostname].ansible_facts.all_ipv4_addresses[0] }}";
+secure_ip = "::1";
+static_dir = "${WWWDIR}";

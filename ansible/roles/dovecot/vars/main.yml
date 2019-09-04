@@ -1,4 +1,8 @@
 ---
+dovecot_scripts:
+  - name: learn-spam.sh
+  - name: learn-ham.sh
+
 dovecot_packages:
   - name: dovecot
   - name: dovecot-pigeonhole
@@ -22,5 +26,29 @@ dovecot_templates:
   - src: 10-ssl.conf
     dest: conf.d
 
+  - src: 15-lda.conf
+    dest: conf.d
+
+  - src: 20-imap.conf
+    dest: conf.d
+
+  - src: 20-lmtp.conf
+    dest: conf.d
+
+  - src: 20-managesieve.conf
+    dest: conf.d
+
+  - src: 90-imapsieve.conf
+    dest: conf.d
+
+  - src: 90-sieve.conf
+    dest: conf.d
+
   - src: auth-ldap.conf.ext
     dest: conf.d
+
+  - src: report-ham.sieve
+    dest: sieve
+
+  - src: report-spam.sieve
+    dest: sieve

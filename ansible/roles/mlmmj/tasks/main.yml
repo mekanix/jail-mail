@@ -20,11 +20,14 @@
     dest: /usr/local/bin/new-mlmmj-list.sh
     mode: 0755
 
+- stat: path=/usr/local/etc/postfix/transport
+  register: postfix_transport
+
 - name: create transport for postfix
   file:
     path: /usr/local/etc/postfix/transport
     state: touch
     mode: 0644
+  when: postfix_transport.stat.exists == False
   notify:
     - refresh transport
-    - restart postfix

@@ -3,3 +3,9 @@
   service:
     name: dovecot
     state: restarted
+
+- name: compile ham
+  command: sievec /usr/local/etc/dovecot/sieve/report-ham.sieve
+
+- name: compile spam
+  command: sievec /usr/local/etc/dovecot/sieve/report-spam.sieve

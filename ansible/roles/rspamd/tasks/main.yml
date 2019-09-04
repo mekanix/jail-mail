@@ -15,6 +15,13 @@
   notify:
     - restart rspamd
 
+- name: configure worker
+  template:
+    src: worker-controller.inc.j2
+    dest: /usr/local/etc/rspamd/worker-controller.inc
+  notify:
+    - restart rspamd
+
 - name: create local.d
   file:
     path: /usr/local/etc/rspamd/local.d
@@ -33,6 +40,8 @@
     state: directory
 
 - name: generate dkim key
-  shell: rspamadm dkim_keygen -s mail -k "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key" -d "{{ mail_domain }}" >"/var/db/rspamd/dkim/{{ mail_domain }}.mail.public"
+  command: rspamadm dkim_keygen -s mail -k "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key" -d "{{ mail_domain }}" >"/var/db/rspamd/dkim/{{ mail_domain }}.mail.public"
+  args:
+    creates: "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key"
   notify:
     - restart rspamd

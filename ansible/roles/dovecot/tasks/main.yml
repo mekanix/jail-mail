@@ -34,6 +34,12 @@
     group: nobody
     state: directory
 
+- name: create sieve directory
+  file:
+    path: /usr/local/etc/dovecot/sieve
+    mode: 0755
+    state: directory
+
 - name: add dovecot user to mail group
   user:
     name: dovecot
@@ -47,3 +53,12 @@
     dest: "/usr/local/etc/dovecot/{{ item.dest }}/{{ item.src }}"
   notify:
     - restart dovecot
+    - compile ham
+    - compile spam
+
+- name: add learning scripts
+  with_items: "{{ dovecot_scripts }}"
+  copy:
+    src: "{{ item.name }}"
+    dest: "/usr/local/etc/dovecot/sieve/{{ item.name }}"
+    mode: 0755
