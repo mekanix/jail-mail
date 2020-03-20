@@ -81,8 +81,8 @@ domains_version = 3
 domains_start_tls = yes
 
 milter_default_action = accept
-smtpd_milters = inet:mail:11332
-non_smtpd_milters = inet:mail:11332
+smtpd_milters = inet:localhost:11332
+non_smtpd_milters = inet:localhost:11332
 
 body_checks_size_limit = 26214400
 message_size_limit = 26214400

@@ -46,3 +46,6 @@ dovecot_templates:
 
   - src: auth-ldap.conf.ext
     dest: conf.d
+
+  - src: stats.conf
+    dest: conf.d

@@ -1,0 +1,14 @@
+service stats {
+  unix_listener stats-reader {
+    mode = 0666
+  }
+  unix_listener stats-writer {
+    mode = 0666
+  }
+}
+
+service anvil {
+  unix_listener anvil {
+    mode = 0666
+  }
+}
