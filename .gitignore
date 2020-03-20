@@ -14,4 +14,5 @@ ansible/roles/*
 templates/fstab
 build/
 cbsd.conf
+project.mk
 vars.mk

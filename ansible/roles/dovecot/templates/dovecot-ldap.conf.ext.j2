@@ -17,7 +17,7 @@
 #        by * none
 
 # Space separated list of LDAP hosts to use. host:port is allowed too.
-hosts = ldap
+hosts = ldap.{{ mail_domain }}
 
 # LDAP URIs to use. You can use this instead of hosts list. Note that this
 # setting isn't supported by all LDAP libraries.
@@ -43,7 +43,7 @@ hosts = ldap
 #sasl_authz_id =
 
 # Use TLS to connect to the LDAP server.
-#tls = no
+tls = yes
 # TLS options, currently supported only with OpenLDAP:
 #tls_ca_cert_file =
 #tls_ca_cert_dir =
