@@ -123,7 +123,7 @@ policy  unix  -       n       n       -       0        spawn
   user=nobody argv=/usr/local/bin/policyd-spf
 
 dovecot unix    -       n       n       -       -       pipe
-  flags=DRhu user=nobody:nobody argv=/usr/local/libexec/dovecot/deliver -d ${recipient}
+  flags=DRhu user=nobody:nobody argv=/usr/local/libexec/dovecot/deliver -d ${user}@${nexthop}
 
 mlmmj   unix  -       n       n       -       -       pipe
   flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-receive -F -L /usr/home/mlmmj/lists/$nexthop
