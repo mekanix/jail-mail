@@ -40,7 +40,7 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = comms.{{ mail_domain }}
+myhostname = mail.{{ mail_domain }}
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
 myorigin = {{ mail_domain }}
