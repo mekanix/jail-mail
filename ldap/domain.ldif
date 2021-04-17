@@ -1,4 +1,7 @@
-dn: ou=DOMAIN,dc=ldap
-objectClass: top
+dn: ou=DOMAIN,dc=account,dc=ldap
+objectClass: organizationalUnit
+ou: DOMAIN
+
+dn: ou=DOMAIN,dc=alias,dc=ldap
 objectClass: organizationalUnit
 ou: DOMAIN

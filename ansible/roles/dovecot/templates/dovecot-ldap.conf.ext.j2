@@ -90,13 +90,13 @@ ldap_version = 3
 
 # LDAP base. %variables can be used here.
 # For example: dc=mail, dc=example, dc=org
-base = ou=%d, dc=ldap
+base = ou=%d, dc=account, dc=ldap
 
 # Dereference: never, searching, finding, always
 #deref = never
 
 # Search scope: base, onelevel, subtree
-scope = subtree
+scope = onelevel
 
 # User attributes are given in LDAP-name=dovecot-internal-name list. The
 # internal names are:

@@ -57,28 +57,39 @@ transport_maps = hash:/usr/local/etc/postfix/transport
 
 virtual_alias_maps = ldap:aliases
 virtual_mailbox_domains = ldap:domains
+virtual_mailbox_maps = ldap:mailboxes
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
 
 aliases_server_host = ldap.{{ mail_domain }}
-aliases_search_base = ou=%d, dc=ldap
+aliases_search_base = ou=%d, dc=alias, dc=ldap
 aliases_query_filter = (&(uid=%u)(objectClass=person))
 aliases_result_attribute = mail
-aliases_scope = sub
+aliases_scope = one
 aliases_cache = no
 aliases_bind = no
 aliases_version = 3
 aliases_start_tls = yes
 
 domains_server_host = ldap.{{ mail_domain }}
-domains_search_base = dc=ldap
+domains_search_base = dc=account, dc=ldap
 domains_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
 domains_result_attribute = ou
-domains_scope = sub
+domains_scope = one
 domains_cache = no
 domains_bind = no
 domains_version = 3
 domains_start_tls = yes
+
+mailboxes_server_host = ldap.{{ mail_domain }}
+mailboxes_search_base = ou=%d, dc=account, dc=ldap
+mailboxes_query_filter = (&(uid=%u)(objectClass=person))
+mailboxes_result_attribute = mail
+mailboxes_scope = one
+mailboxes_cache = no
+mailboxes_bind = no
+mailboxes_version = 3
+mailboxes_start_tls = yes
 
 milter_default_action = accept
 smtpd_milters = inet:localhost:11332

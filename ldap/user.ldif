@@ -1,9 +1,6 @@
-dn: uid=USER,ou=DOMAIN,dc=ldap
-objectClass: top
-objectClass: person
-objectClass: posixAccount
-objectClass: shadowAccount
+dn: uid=USER,ou=DOMAIN,dc=account,dc=ldap
 objectClass: pilotPerson
+objectClass: posixAccount
 cn: FIRST LAST
 sn: LAST
 uid: USER
