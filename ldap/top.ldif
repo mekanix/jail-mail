@@ -2,16 +2,8 @@ dn: dc=ldap
 objectClass: dcObject
 objectClass: organization
 o: ldap
-dc: ldap
 
 dn: dc=account,dc=ldap
 objectClass: dcObject
 objectClass: organization
 o: account
-dc: account
-
-dn: dc=alias,dc=ldap
-objectClass: dcObject
-objectClass: organization
-o: alias
-dc: alias

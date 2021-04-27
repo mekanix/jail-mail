@@ -3,14 +3,9 @@ objectClass: pilotPerson
 objectClass: posixAccount
 cn: FIRST LAST
 sn: LAST
-uid: USER
 uidNumber: 65534
 gidNumber: 65534
 homeDirectory: /var/mail/domains/DOMAIN/USER
-loginShell: /bin/false
-gecos: System User
-shadowLastChange: 13979
-shadowMax: 45
 mail: USER@DOMAIN
 userClass: jabber
 userClass: mail

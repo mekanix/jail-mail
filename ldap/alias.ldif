@@ -1,5 +1,0 @@
-dn: uid=USER,ou=DOMAIN,dc=alias,dc=ldap
-objectClass: inetOrgPerson
-cn: alias
-sn: alias
-mail: USER@DOMAIN
