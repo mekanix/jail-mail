@@ -1,3 +1,4 @@
 ---
 mlmmj_packages:
+  - name: hypermail
   - name: mlmmj

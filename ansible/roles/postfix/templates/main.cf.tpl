@@ -46,6 +46,7 @@ transport_maps = ldap:transport
 virtual_mailbox_maps = ldap:mailboxes
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
+mlmmj_destination_recipient_limit = 1
 
 domains_server_host = ldap.{{ mail_domain }}
 domains_search_base = dc=account, dc=ldap

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+MLMMJ_HOME="/usr/home/mlmmj"
+TEMP_FILE=`mktemp`
+trap "rm -f ${TEMP_FILE}" HUP INT ABRT BUS TERM EXIT
+
+while read something; do
+  echo $something >>"${TEMP_FILE}"
+done
+
+nexthop="$1"
+cat "${TEMP_FILE}" | /usr/local/bin/mlmmj-receive -F -L "${MLMMJ_HOME}/lists/${nexthop}"
+if [ ! -e "${MLMMJ_HOME}/lists/${nexthop}/noarchive" ]; then
+  env HM_REVERSE=1 HM_INCREMENT=1 /usr/local/bin/hypermail -d "/usr/home/mlmmj/webarchive/${nexthop}" -m "${TEMP_FILE}"
+fi

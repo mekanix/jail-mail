@@ -13,6 +13,16 @@
     path: /usr/home/mlmmj/lists
     state: directory
     mode: 0750
+    owner: mlmmj
+    group: mlmmj
+
+- name: create archive directory
+  file:
+    path: /usr/home/mlmmj/webarchive
+    state: directory
+    mode: 0755
+    owner: mlmmj
+    group: mlmmj
 
 - name: install mlmmj list create script
   copy:
@@ -20,14 +30,8 @@
     dest: /usr/local/bin/new-mlmmj-list.sh
     mode: 0755
 
-- stat: path=/usr/local/etc/postfix/transport
-  register: postfix_transport
-
-- name: create transport for postfix
-  file:
-    path: /usr/local/etc/postfix/transport
-    state: touch
-    mode: 0644
-  when: postfix_transport.stat.exists == False
-  notify:
-    - refresh transport
+- name: install mlmmj helper script
+  copy:
+    src: mlmmj-helper
+    dest: /usr/local/bin/mlmmj-helper
+    mode: 0755
