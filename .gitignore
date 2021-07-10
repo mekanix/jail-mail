@@ -6,6 +6,7 @@ ansible/inventory/inventory
 ansible/site.yml
 ansible/roles/*
 !ansible/roles/dovecot
+!ansible/roles/ldap
 !ansible/roles/mlmmj
 !ansible/roles/postfix
 !ansible/roles/repo

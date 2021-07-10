@@ -10,4 +10,5 @@
     - rspamd
     - dovecot
     - postfix
+    - ldap
     - mlmmj

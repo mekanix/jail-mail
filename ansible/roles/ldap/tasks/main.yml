@@ -1,0 +1,5 @@
+---
+- name: configure ldap client
+  template:
+    src: ldap.conf.j2
+    dest: /usr/local/etc/openldap/ldap.conf

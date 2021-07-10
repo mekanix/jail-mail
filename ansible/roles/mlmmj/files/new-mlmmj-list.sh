@@ -35,27 +35,17 @@ printf "${LIST_DOMAIN}\n${OWNER}\n\ny\n" | mlmmj-make-ml -L "${LIST_NAME}" -s "$
 echo "Reply-To: ${LIST_ADDRESS}" >"${SPOOL_DIR}/${LIST_NAME}/control/customheaders"
 echo -e "\n---\nTo unsubscribe send email to ${LIST_NAME}+unsubscribe@${LIST_DOMAIN}" >"${SPOOL_DIR}/${LIST_NAME}/control/footer"
 echo "[${LIST_NAME}]" >"${SPOOL_DIR}/${LIST_NAME}/control/prefix"
-echo "${LIST_DOMAIN}--${LIST_NAME}@localhost.mlmmj mlmmj:${LIST_DOMAIN}/${LIST_NAME}" >>/usr/local/etc/postfix/transport
-postmap /usr/local/etc/postfix/transport
-service postfix reload
 
-cat <<EOF
-dn: uid=${LIST_NAME},ou=${LIST_DOMAIN},dc=ldap
-objectClass: top
-objectClass: person
-objectClass: posixAccount
-objectClass: shadowAccount
+cat <<EOF | ldapadd -Z -W -D cn=root,dc=ldap
+dn: uid=${LIST_NAME},ou=${LIST_DOMAIN},dc=account,dc=ldap
 objectClass: pilotPerson
-cn: ${LIST_NAME} list
-sn: list
-uid: ${LIST_ADDRESS}
+objectClass: posixAccount
+cn: List ${LIST_NAME}
+sn: ${LIST_NAME}
 uidNumber: 65534
 gidNumber: 65534
 homeDirectory: /var/mail/domains/${LIST_DOMAIN}/${LIST_NAME}
-loginShell: /bin/false
-gecos: System User
-shadowLastChange: 13979
-shadowMax: 45
-mail: ${LIST_DOMAIN}--${LIST_NAME}@localhost.mlmmj
+textEncodedORAddress: mlmmj:${LIST_DOMAIN}/${LIST_NAME}
+otherMailbox: ${LIST_NAME}@${LIST_DOMAIN}
 userClass: mail
 EOF
