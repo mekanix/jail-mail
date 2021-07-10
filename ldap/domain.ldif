@@ -1,2 +1,0 @@
-dn: ou=DOMAIN,dc=account,dc=ldap
-objectClass: organizationalUnit
