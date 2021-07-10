@@ -10,6 +10,11 @@ done
 
 nexthop="$1"
 cat "${TEMP_FILE}" | /usr/local/bin/mlmmj-receive -F -L "${MLMMJ_HOME}/lists/${nexthop}"
-if [ ! -e "${MLMMJ_HOME}/lists/${nexthop}/noarchive" ]; then
-  env HM_REVERSE=1 HM_INCREMENT=1 /usr/local/bin/hypermail -d "/usr/home/mlmmj/webarchive/${nexthop}" -m "${TEMP_FILE}"
+ret=$?
+if [ "${ret}" != "0" ]; then
+  exit 1
+fi
+if [ ! -e "${MLMMJ_HOME}/lists/${nexthop}/private" ]; then
+  LABEL=$(cut -f 2 -d '[' "${MLMMJ_HOME}/lists/${nexthop}/prefix" | cut -f 1 -d ']')
+  env HM_REVERSE=1 HM_INCREMENT=1 /usr/local/bin/hypermail -d "/usr/home/mlmmj/webarchive/${nexthop}" -l "${LABEL}" -m "${TEMP_FILE}"
 fi
