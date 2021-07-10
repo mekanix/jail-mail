@@ -27,6 +27,10 @@
     path: /usr/local/etc/rspamd/local.d
     state: directory
 
+- name: get hoster name
+  shell: "hostname -d | cut -f 1 -d ."
+  register: hoster
+
 - name: configure dkim signing
   template:
     src: dkim_signing.conf.j2
@@ -47,8 +51,8 @@
     state: directory
 
 - name: generate dkim key
-  command: rspamadm dkim_keygen -s mail -k "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key" -d "{{ mail_domain }}" >"/var/db/rspamd/dkim/{{ mail_domain }}.mail.public"
+  shell: "rspamadm dkim_keygen -s {{ hoster.stdout }} -k /var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.key -d {{ mail_domain }} >/var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.public"
   args:
-    creates: "/var/db/rspamd/dkim/{{ mail_domain }}.mail.key"
+    creates: "/var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.key"
   notify:
     - restart rspamd
