@@ -30,11 +30,15 @@ if [ -z "${LIST_DOMAIN}" ]; then
 fi
 
 
-SPOOL_DIR="/usr/home/mlmmj/lists/${LIST_DOMAIN}"
+MLMMJ_HOME="/usr/home/mlmmj"
+LISTS_DIR="${MLMMJ_HOME}/lists"
+SPOOL_DIR="${LISTS_DIR}/${LIST_DOMAIN}"
 printf "${LIST_DOMAIN}\n${OWNER}\n\ny\n" | mlmmj-make-ml -L "${LIST_NAME}" -s "${SPOOL_DIR}" -c mlmmj
 echo "Reply-To: ${LIST_ADDRESS}" >"${SPOOL_DIR}/${LIST_NAME}/control/customheaders"
 echo -e "\n---\nTo unsubscribe send email to ${LIST_NAME}+unsubscribe@${LIST_DOMAIN}" >"${SPOOL_DIR}/${LIST_NAME}/control/footer"
 echo "[${LIST_NAME}]" >"${SPOOL_DIR}/${LIST_NAME}/control/prefix"
+touch "${SPOOL_DIR}/${LIST_NAME}/control/subonlypost"
+mkdir -p "${MLMMJ_HOME}/webarchive/${LIST_DOMAIN}/${LIST_NAME}"
 
 cat <<EOF | ldapadd -Z -W -D cn=root,dc=ldap
 dn: uid=${LIST_NAME},ou=${LIST_DOMAIN},dc=account,dc=ldap

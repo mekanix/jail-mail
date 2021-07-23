@@ -35,3 +35,9 @@
     src: mlmmj-helper
     dest: /usr/local/bin/mlmmj-helper
     mode: 0755
+
+- name: install mail decoder script
+  copy:
+    src: decode-mail.py
+    dest: /usr/local/bin/decode-mail.py
+    mode: 0755
