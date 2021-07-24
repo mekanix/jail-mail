@@ -189,6 +189,22 @@ that).
 
 ## RSpamd
 
+dkim_signing.conf:
+```
+selector = "{{ hoster.stdout }}";
+allow_username_mismatch = true;
+path = "/var/db/rspamd/dkim/$domain.$selector.key";
+```
+Selector is what tells receiving SMTP server which DNS record to check for
+DKIM and `hoster.stdout` will be replaced with host's (not jail) hostname.
+
+milter_headers.conf:
+```
+extended_spam_headers = true;
+use = ["x-spam-status"];
+```
+If mail is SPAM, add header denoting the SPAM status.
+
 ## Mlmmj
 
 ## Hypermail
