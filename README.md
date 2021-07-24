@@ -207,4 +207,18 @@ If mail is SPAM, add header denoting the SPAM status.
 
 ## Mlmmj
 
+Every mailing list in LDAP is just an alias with `textEncodedORAddress` set to
+mlmmj (transport). That means all mail with mlmmj transport will be piped to
+a mlmmj for check and delivery and if successful pipe it to Hypermail for 
+archiving. To create a new list run `new-mlmmj-list.sh <list address> <owner>`.
+For example:
+```
+new-mlmmj-list.sh list@example.com user@example.com
+```
+All lists are in `~mlmmj/lists/<list name>`.
+
 ## Hypermail
+
+To generate WEB archive of public mailing lists, Hypermail uses small Python 
+script which strips attachments and all non-essential headers. The script is 
+`decode-mail.py`. The archive is placed under `~mlmmj/webarchive/<list name>`.
