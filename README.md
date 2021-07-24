@@ -3,13 +3,15 @@
 To create mail service/jail, the following software will be installed and
 configured:
 
-* Postfix (smtp, submission)
-* Dovecot (imap, sieve)
-* RSpamd (spam, dkim, dmarc, spf, ...)
-* Mlmmj (mailing list)
-* Hypermail (web archive for mailing lists)
+* [Postfix](#postfix) (smtp, submission)
+* [Dovecot](#dovecot) (imap, sieve)
+* [RSpamd](#rspamd) (spam, dkim, dmarc, spf, ...)
+* [Mlmmj](#mlmmj) (mailing list)
+* [Hypermail](#hypermail) (web archive for mailing lists)
 
-Installed postfix and dovecot are built with LDAP support.
+Installed postfix and dovecot are built with LDAP support. You should check out 
+[LDAP repo](https://github.com/mekanix/jail-ldap) especially `examples` as that
+schema is going to be used here.
 
 ## Postfix
 main.cf:
@@ -117,6 +119,76 @@ If transport in LDAP told Postfix to use mlmmj, pipe email through mlmmj-helper.
 
 ## Dovecot
 
+dovecot-ldap.conf.ext:
+```
+auth_bind = yes
+ldap_version = 3
+base = ou=%d, dc=account, dc=ldap
+scope = onelevel
+
+user_filter = (&(objectClass=person)(uid=%n)(userClass=mail))
+pass_attrs = uid=user,userPassword=password,\
+  homeDirectory=userdb_home,uidNumber=userdb_uid,gidNumber=userdb_gid
+pass_filter = (&(objectClass=person)(uid=%n)(userClass=mail))
+```
+As Dovecot only has mailboxes and passwords, it's LDAP configuration is 
+simpler. 
+
+90-imapsieve.conf:
+```
+plugin {
+  sieve_plugins = sieve_imapsieve sieve_extprograms
+
+  # From elsewhere to Spam folder
+  imapsieve_mailbox1_name = Spam
+  imapsieve_mailbox1_causes = COPY
+  imapsieve_mailbox1_before = file:/usr/local/etc/dovecot/sieve/report-spam.sieve
+
+  # From Spam folder to elsewhere
+  imapsieve_mailbox2_name = *
+  imapsieve_mailbox2_from = Spam
+  imapsieve_mailbox2_causes = COPY
+  imapsieve_mailbox2_before = file:/usr/local/etc/dovecot/sieve/report-ham.sieve
+
+  sieve_pipe_bin_dir = /usr/local/etc/dovecot/sieve
+
+  sieve_global_extensions = +vnd.dovecot.pipe
+}
+```
+If mail is moved from any folder into SPAM, Dovecot will run `report-spam.sieve` 
+to train RSpamd. Similar happens when mail is moved out of SPAM folder.
+
+after.sieve:
+```
+require ["fileinto", "mailbox", "imap4flags"];
+
+if header :contains "X-Spam" "Yes" {
+  fileinto :create "Spam";
+  setflag "\\seen";
+  stop;
+}
+```
+Move all mails marked as SPAM to SPAM folder.
+
+10-master.conf:
+```
+service auth {
+  unix_listener auth-userdb {
+  }
+
+  # Postfix smtp-auth
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+    user = postfix
+    group = postfix
+  }
+}
+```
+Postfix will use Dovecot's SASL authentication (avoid using Cyrus just for 
+that).
+
 ## RSpamd
 
 ## Mlmmj
+
+## Hypermail
