@@ -85,8 +85,8 @@ transport_start_tls = yes
 Transport, if found in `textEncodedORAddress` attribute, is used to pass
 message to mailing list software. If no transport configuration is found in
 LDAP, dovecot LDA is used by default. Note that mailing list in LDAP is just an
-alias with `textEncodedORAddress` set. Example of `textEncodedORAddress` is 
-`textEncodedORAddress: mlmmj:example.com/list`. That means that `mlmmj` 
+alias with `textEncodedORAddress` set. For example, you can use 
+`textEncodedORAddress: mlmmj:example.com/list` which means that `mlmmj` 
 transport will be used and `example.com/list` is used as an argument for a 
 transport to know which domain/list should it deliver to.
 
