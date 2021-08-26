@@ -51,7 +51,7 @@
     state: directory
 
 - name: generate dkim key
-  shell: "rspamadm dkim_keygen -s {{ hoster.stdout }} -k /var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.key -d {{ mail_domain }} >/var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.public"
+  shell: "rspamadm dkim_keygen -s {{ hoster.stdout }} -k /var/db/rspamd/dkim/{{ hoster.stdout }}.{{ mail_domain }}.key -d {{ mail_domain }} >/var/db/rspamd/dkim/{{ hoster.stdout }}.{{ mail_domain }}.public"
   args:
     creates: "/var/db/rspamd/dkim/{{ mail_domain }}.{{ hoster.stdout }}.key"
   notify:
