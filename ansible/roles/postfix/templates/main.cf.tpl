@@ -1,3 +1,4 @@
+myhostname = {{ hoster.stdout }}
 smtpd_banner = $mydomain ESMTP $mail_name
 biff = no
 append_dot_mydomain = no
@@ -32,7 +33,7 @@ smtpd_relay_restrictions =
 alias_maps = hash:/etc/mail/aliases
 alias_database = hash:/etc/mail/aliases
 myorigin = {{ mail_domain }}
-mydestination = mail.{{ mail_domain }} localhost
+mydestination = {{ hoster.stdout }} localhost
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_transport = dovecot

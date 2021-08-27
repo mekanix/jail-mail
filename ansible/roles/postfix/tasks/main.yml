@@ -6,6 +6,10 @@
   notify:
     - restart postfix
 
+- name: get hoster fqdn
+  shell: "hostname -d"
+  register: hoster
+
 - name: confgure postfix service
   template:
     src: postfix.j2
