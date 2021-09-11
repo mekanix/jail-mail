@@ -126,4 +126,4 @@ dovecot unix    -       n       n       -       -       pipe
   flags=DRhu user=nobody:nobody argv=/usr/local/libexec/dovecot/deliver -d ${user}@${nexthop}
 
 mlmmj   unix  -       n       n       -       -       pipe
-  flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-helper ${nexthop}
+  flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-helper ${nexthop} ${extension}

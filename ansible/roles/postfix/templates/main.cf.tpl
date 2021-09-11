@@ -46,6 +46,7 @@ virtual_alias_maps = ldap:aliases
 transport_maps = ldap:transport
 virtual_mailbox_maps = ldap:mailboxes
 virtual_transport = dovecot
+tls_server_sni_maps = ldap:sni
 dovecot_destination_recipient_limit = 1
 mlmmj_destination_recipient_limit = 1
 
@@ -88,6 +89,16 @@ mailboxes_cache = no
 mailboxes_bind = no
 mailboxes_version = 3
 mailboxes_start_tls = yes
+
+sni_server_host = ldap.{{ mail_domain }}
+sni_search_base = ou=%d, dc=account, dc=ldap
+sni_query_filter = (&(ou=%s)(objectClass=organizationalUnit))
+sni_result_attribute = delegationPath
+sni_scope = base
+sni_cache = no
+sni_bind = no
+sni_version = 3
+sni_start_tls = yes
 
 milter_default_action = accept
 smtpd_milters = inet:localhost:11332
