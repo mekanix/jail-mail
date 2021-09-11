@@ -18,7 +18,7 @@
 - name: configure worker
   template:
     src: worker-controller.inc.j2
-    dest: /usr/local/etc/rspamd/worker-controller.inc
+    dest: /usr/local/etc/rspamd/local.d/worker-controller.inc
   notify:
     - restart rspamd
 
