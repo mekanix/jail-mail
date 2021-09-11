@@ -116,7 +116,7 @@ especially useful with filtering (sieve)
 master.cf:
 ```
 mlmmj   unix  -       n       n       -       -       pipe
-  flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-helper ${nexthop}
+  flags=ORhu user=mlmmj argv=/usr/local/bin/mlmmj-helper ${nexthop} ${extension}
 ```
 If transport in LDAP told Postfix to use mlmmj, pipe email through mlmmj-helper.
 
