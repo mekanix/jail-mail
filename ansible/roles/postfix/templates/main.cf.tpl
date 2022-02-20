@@ -106,4 +106,3 @@ non_smtpd_milters = inet:localhost:11332
 body_checks_size_limit = 26214400
 message_size_limit = 26214400
 compatibility_level = 2
-inet_protocols = ipv4
