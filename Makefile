@@ -1,6 +1,6 @@
 SERVICE = mail
 REGGAE_PATH = /usr/local/share/reggae
-PORTS = 25 587 993
+PORTS = 25 587 993 12345
 SELECTOR ?= mail
 
 post_setup_ansible:

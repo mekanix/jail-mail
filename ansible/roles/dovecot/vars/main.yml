@@ -44,6 +44,9 @@ dovecot_templates:
   - src: 90-sieve.conf
     dest: conf.d
 
+  - src: 90-dsync.conf
+    dest: conf.d
+
   - src: auth-ldap.conf.ext
     dest: conf.d
 
