@@ -14,6 +14,7 @@
     group: wheel
   notify:
     - restart rspamd
+
 - name: create local.d
   file:
     path: /usr/local/etc/rspamd/local.d

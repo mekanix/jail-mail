@@ -128,14 +128,14 @@ user_filter = (&(objectClass=person)(mail=%u)(userClass=mail))
 # userdb prefetch instead of userdb ldap in dovecot.conf. In that case you'll
 # also have to include user_attrs in pass_attrs field prefixed with "userdb_"
 # string. For example:
-pass_attrs = uid=user,userPassword=password,mail=mail,\
+pass_attrs = userPassword=password,mail=mail,\
   homeDirectory=userdb_home,uidNumber=userdb_uid,gidNumber=userdb_gid
 
 # Filter for password lookups
 pass_filter = (&(objectClass=person)(mail=%u)(userClass=mail))
 
 # Attributes and filter to get a list of all users
-#iterate_attrs = uid=user
+iterate_attrs = mail=user
 #iterate_filter = (&(objectClass=person)(userClass=mail))
 
 # Default password scheme. "{scheme}" before password overrides this.
