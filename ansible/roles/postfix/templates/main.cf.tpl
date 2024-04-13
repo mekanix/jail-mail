@@ -70,7 +70,7 @@ aliases_bind = no
 aliases_version = 3
 aliases_start_tls = yes
 
-transport_server_host = ldap.tilda.center
+transport_server_host = ldap.{{ mail_domain }}
 transport_search_base = ou=%d, dc=account, dc=ldap
 transport_query_filter = (&(uid=%u)(objectClass=person)(userClass=mail))
 transport_result_attribute = textEncodedORAddress
