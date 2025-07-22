@@ -29,10 +29,16 @@
 - name: create directory for domains
   file:
     path: /var/mail/domains
-    mode: 0700
-    owner: nobody
-    group: nobody
+    mode: 0777
+    owner: mailnull
+    group: mail
     state: directory
+
+- name: set cron to change ownership of /var/mail/domains subdirectories
+  cron:
+    name: change ownership of /var/mail/domains
+    job: chmod 777 /var/mail/domains/*
+    minute: '*/5'
 
 - name: create sieve directory
   file:
